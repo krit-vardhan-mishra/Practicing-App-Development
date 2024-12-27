@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Practicing</string>
+    <string name="title"><u>Login-Screen</u></string>
+    <string name="name">Enter Your Name</string>
+    <string name="password">Enter Your Password</string>
+    <string name="email">Enter Your Email Address</string>
+    <string name="name_view">Name:</string>
+    <string name="email_view">Email:</string>
+    <string name="password_view">Password:</string>
+    <string name="submit">Submit</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.PracticingAndroidDevelopment" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/theme_color</item>
+        <item name="colorPrimaryVariant">@color/theme_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color -->
+        <item name="colorSecondary">@color/theme_color</item>
+        <item name="colorSecondaryVariant">@color/theme_color</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <!-- Status bar color -->
+        <item name="android:statusBarColor">@color/theme_color</item>
+
+        <!-- Background color -->
+        <item name="android:windowBackground">@color/theme_color</item>
+    </style>
+</resources>
