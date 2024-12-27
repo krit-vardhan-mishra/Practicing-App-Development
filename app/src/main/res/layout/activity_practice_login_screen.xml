@@ -128,16 +128,68 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
 
-    <com.getbase.floatingactionbutton.FloatingActionButton
-        android:id="@+id/action_button"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/secondary_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:fab_colorNormal="@color/black"
-        app:fab_colorPressed="@color/light_salmon"
-        app:fab_icon="@drawable/add_icon"
-        app:fab_size="mini"
+        android:minHeight="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:fab_colorNormal="@color/black"
+            app:fab_colorPressed="@color/light_salmon"
+            app:fab_icon="@drawable/add_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/account_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:fab_colorNormal="@color/black"
+            app:fab_colorPressed="@color/light_salmon"
+            app:fab_icon="@drawable/account_icon"
+            app:fab_size="mini"
+            tools:layout_editor_absoluteX="300dp"
+            tools:layout_editor_absoluteY="-122dp"
+            app:layout_constraintBottom_toTopOf="@id/action_button"
+            app:layout_constraintEnd_toEndOf="@id/action_button" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/ride_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="12dp"
+            app:fab_colorNormal="@color/black"
+            app:fab_colorPressed="@color/light_salmon"
+            app:fab_icon="@drawable/make_ride_icon"
+            app:fab_size="mini"
+            app:layout_constraintBottom_toTopOf="@id/account_button"
+            app:layout_constraintEnd_toEndOf="@id/account_button" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="11dp"
+            app:fab_colorNormal="@color/black"
+            app:fab_colorPressed="@color/light_salmon"
+            app:fab_icon="@drawable/share_icon"
+            app:fab_size="mini"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="123dp"
+            app:layout_constraintBottom_toTopOf="@id/share_button"
+            app:layout_constraintEnd_toEndOf="@id/share_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
