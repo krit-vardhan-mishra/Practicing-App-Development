@@ -11,6 +11,7 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 floatingactionbutton = "1.10.1"
 materialVersion = "1.11.0"
+coreAnimation = "1.0.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -23,6 +24,7 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 floatingactionbutton = { group = "com.getbase", name = "floatingactionbutton", version.ref = "floatingactionbutton" }
 material-v1110 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
+core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

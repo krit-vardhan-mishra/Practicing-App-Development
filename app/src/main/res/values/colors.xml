@@ -117,6 +117,8 @@
         <color name="medium_slate_blue">#7B68EE</color>
         <color name="light_slate_gray">#778899</color>
         <color name="slate_gray">#708090</color>
+        <color name="random">#3E403E</color>
+    <color name="dimmed_background">#80000000</color>
         <color name="olive_drab">#6B8E23</color>
         <color name="slate_blue">#6A5ACD</color>
         <color name="dim_gray">#696969</color>
@@ -153,4 +155,5 @@
         <color name="medium_blue">#0000CD</color>
         <color name="dark_blue">#00008B</color>
         <color name="navy">#000080</color>
+        <color name="another_random">#6C7171</color>
 </resources>
