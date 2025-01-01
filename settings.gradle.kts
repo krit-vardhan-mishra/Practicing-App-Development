@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Practicing Android Development"
 include(":app")
- 
+include(":mycalculator")
