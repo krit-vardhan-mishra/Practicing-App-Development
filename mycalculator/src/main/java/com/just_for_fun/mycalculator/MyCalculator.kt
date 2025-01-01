@@ -5,59 +5,21 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import java.lang.Double.parseDouble
-import java.lang.Integer.parseInt
+import kotlin.math.*
 
 class MyCalculator : AppCompatActivity() {
 
-    // For checking
-    private var isUsed : Boolean = false
-    private var isTrigonometry : Boolean = false
-
     // Resultant Strings
-    private var operandOne : String = ""
-    private var operandTwo : String = ""
+    private var firstNumber : String = ""
+    private var secondNumber : String = ""
     private var operator : String? = null
-    private var result : String = ""
 
     // Input TextViews
     private lateinit var firstInput : TextView
     private lateinit var secondInput : TextView
     private lateinit var resultView : TextView
-
-    // Number Buttons
-    private lateinit var buttonOne : AppCompatButton
-    private lateinit var buttonTwo : AppCompatButton
-    private lateinit var buttonThree : AppCompatButton
-    private lateinit var buttonFour : AppCompatButton
-    private lateinit var buttonFive : AppCompatButton
-    private lateinit var buttonSix : AppCompatButton
-    private lateinit var buttonSeven : AppCompatButton
-    private lateinit var buttonEight : AppCompatButton
-    private lateinit var buttonNine : AppCompatButton
-    private lateinit var buttonZero : AppCompatButton
-    private lateinit var buttonDot : AppCompatButton
-
-    // Operator Buttons
-    private lateinit var addition : AppCompatButton
-    private lateinit var subtraction : AppCompatButton
-    private lateinit var multiplication : AppCompatButton
-    private lateinit var division : AppCompatButton
-
-    // Function Buttons
-    private lateinit var power : AppCompatButton
-    private lateinit var pie : AppCompatButton
-    private lateinit var root : AppCompatButton
-
-    // Trigonometric Buttons
-    private lateinit var sin : AppCompatButton
-    private lateinit var cos : AppCompatButton
-    private lateinit var tan : AppCompatButton
-
-    // Special Buttons
-    private lateinit var delete : AppCompatButton
-    private lateinit var equal : AppCompatButton
-    private lateinit var clear : AppCompatButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,246 +31,188 @@ class MyCalculator : AppCompatActivity() {
         secondInput = findViewById(R.id.second_input)
         resultView = findViewById(R.id.result)
 
-        // Initializing Number Buttons
-        buttonOne = findViewById(R.id.button_1)
-        buttonTwo = findViewById(R.id.button_2)
-        buttonThree = findViewById(R.id.button_3)
-        buttonFour = findViewById(R.id.button_4)
-        buttonFive = findViewById(R.id.button_5)
-        buttonSix = findViewById(R.id.button_6)
-        buttonSeven = findViewById(R.id.button_7)
-        buttonEight= findViewById(R.id.button_8)
-        buttonNine = findViewById(R.id.button_9)
-        buttonZero = findViewById(R.id.button_0)
-        buttonDot = findViewById(R.id.button_dot)
-
-        // Operator Initializing
-        addition = findViewById(R.id.button_add)
-        subtraction = findViewById(R.id.button_sub)
-        multiplication = findViewById(R.id.button_mul)
-        division = findViewById(R.id.button_div)
-
-        // Function Initializing
-        power = findViewById(R.id.button_power)
-        pie = findViewById(R.id.button_pie)
-        root = findViewById(R.id.button_root)
-
-        // Trigonometry Initializing
-        sin = findViewById(R.id.button_sin)
-        cos = findViewById(R.id.button_cos)
-        tan = findViewById(R.id.button_tan)
-
-        // Special Button Initializing
-        clear = findViewById(R.id.button_clear)
-        delete = findViewById(R.id.button_del)
-        equal = findViewById(R.id.button_equal)
-
-        calculator()
+        resetLayouts()
+        numbersButton()
+        operatorsButton()
     }
 
-    private fun calculator() {
-        buttonOne.setOnClickListener {
-            fillInput("1")
-        }
+    private fun numbersButton() {
 
-        buttonTwo.setOnClickListener {
-            fillInput("2")
-        }
+        val numberButtons = listOf(
+            R.id.button_0, R.id.button_1, R.id.button_2, R.id.button_3,
+            R.id.button_4, R.id.button_5, R.id.button_6, R.id.button_7,
+            R.id.button_8, R.id.button_9, R.id.button_dot
+        )
 
-        buttonThree.setOnClickListener {
-            fillInput("3")
-        }
-
-        buttonFour.setOnClickListener {
-            fillInput("4")
-        }
-
-        buttonFive.setOnClickListener {
-            fillInput("5")
-        }
-
-        buttonSix.setOnClickListener {
-            fillInput("6")
-        }
-
-        buttonSeven.setOnClickListener {
-            fillInput("7")
-        }
-
-        buttonEight.setOnClickListener {
-            fillInput("8")
-        }
-
-        buttonNine.setOnClickListener {
-            fillInput("9")
-        }
-
-        buttonZero.setOnClickListener {
-            fillInput("0")
-        }
-
-        buttonDot.setOnClickListener {
-            fillInput(".")
-        }
-
-        addition.setOnClickListener {
-            operatorCall("add")
-        }
-
-        subtraction.setOnClickListener {
-            operatorCall("sub")
-        }
-
-        multiplication.setOnClickListener {
-            operatorCall("mul")
-        }
-
-        division.setOnClickListener {
-            operatorCall("div")
-        }
-
-        power.setOnClickListener {
-            operatorCall("pow")
-        }
-
-        sin.setOnClickListener {
-            performTrigonometry("sin")
-        }
-
-        cos.setOnClickListener {
-            performTrigonometry("cos")
-        }
-
-        tan.setOnClickListener {
-            performTrigonometry("tan")
-        }
-
-        equal.setOnClickListener {
-            performEqualTo()
-        }
-
-        clear.setOnClickListener {
-            performClear()
-        }
-
-        delete.setOnClickListener {
-            performDelete()
-        }
-    }
-
-
-    private fun fillInput(num : String) {
-        if (isUsed) {
-             when (num) {
-                 "0" -> operandTwo += 0
-                 "1" -> operandTwo += 1
-                 "2" -> operandTwo += 2
-                 "3" -> operandTwo += 3
-                 "4" -> operandTwo += 4
-                 "5" -> operandTwo += 5
-                 "6" -> operandTwo += 6
-                 "7" -> operandTwo += 7
-                 "8" -> operandTwo += 8
-                 "9" -> operandTwo += 9
-                 "." -> operandTwo += "."
-             }
-        } else {
-            when (num) {
-                "0" -> operandOne += 0
-                "1" -> operandOne += 1
-                "2" -> operandOne += 2
-                "3" -> operandOne += 3
-                "4" -> operandOne += 4
-                "5" -> operandOne += 5
-                "6" -> operandOne += 6
-                "7" -> operandOne += 7
-                "8" -> operandOne += 8
-                "9" -> operandOne += 9
-                "." -> operandOne += "."
+        for (id in numberButtons) {
+            findViewById<AppCompatButton>(id).setOnClickListener { view ->
+                fillInput((view as AppCompatButton).text.toString())
             }
-            isUsed = true
         }
     }
 
-    private fun operatorCall(opt : String) {
-        when (opt) {
-            "add" -> operator = "+"
-            "sub" -> operator = "-"
-            "mul" -> operator = "*"
-            "div" -> operator = "/"
-            "pow" -> operator = "^"
-        }
-    }
+    private fun operatorsButton() {
+        val operatorButtons = mapOf (
+            R.id.button_add to "+",
+            R.id.button_sub to "-",
+            R.id.button_mul to "*",
+            R.id.button_div to "/",
+            R.id.button_power to "^",
+        )
 
-    private fun performTrigonometry(str : String) {
-        if (!isUsed) {
-            when (str) {
-                "sin" -> trigonometryOperation("sin")
-                "cos" -> trigonometryOperation("cos")
-                "tan" -> trigonometryOperation("tan")
+        for ((id, op) in operatorButtons) {
+            findViewById<AppCompatButton>(id).setOnClickListener {
+                handleOperatorInput(op)
             }
+        }
+
+        findViewById<AppCompatButton>(R.id.button_equal).setOnClickListener { performEqualTo() }
+        findViewById<AppCompatButton>(R.id.button_clear).setOnClickListener { performClear() }
+        findViewById<AppCompatButton>(R.id.button_del).setOnClickListener { performDelete() }
+        findViewById<AppCompatButton>(R.id.button_root).setOnClickListener { performRoot() }
+        findViewById<AppCompatButton>(R.id.button_pie).setOnClickListener { fillInput(PI.toString()) }
+        findViewById<AppCompatButton>(R.id.button_sin).setOnClickListener { performTrigonometry("sin") }
+        findViewById<AppCompatButton>(R.id.button_cos).setOnClickListener { performTrigonometry("cos") }
+        findViewById<AppCompatButton>(R.id.button_tan).setOnClickListener { performTrigonometry("tan") }
+    }
+
+    private fun fillInput(input : String) {
+        if (operator == null) {
+            firstNumber += input
+            firstInput.text = firstNumber
         } else {
-            operator = str
+            secondNumber += input
+            secondInput.text = secondNumber
         }
     }
 
-    private fun trigonometryOperation(str : String) {
-        operandOne = "0"
-        operator = str
-        isTrigonometry = true
+    private fun handleOperatorInput(opt : String) {
+        if (firstNumber.isNotEmpty()) {
+            operator = opt
+            shiftLayout()
+            firstInput.text = "$firstNumber $operator"
+            secondInput.text = operator
+            resultView.text = ""
+            firstInput.textSize = 32f
+            firstInput.height = 50
+            firstInput.layoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            firstInput.layoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            firstInput.requestLayout()
+        }
+    }
+
+    private fun performRoot() {
+        if (firstNumber.isNotEmpty()) {
+            val result = sqrt(firstNumber.toDouble())
+            displayResult(result)
+        }
+    }
+
+    private fun performTrigonometry(type : String) {
+        if (firstNumber.isNotEmpty()) {
+            val radians = Math.toRadians(firstNumber.toDouble())
+            val result = when (type) {
+                "sin" -> sin(radians)
+                "cos" -> cos(radians)
+                "tan" -> tan(radians)
+                else -> 0.0
+
+            }
+            displayResult(result)
+        }
     }
 
     private fun performClear() {
-        result = ""
-        operator = ""
-        isUsed = false
-        operandOne = ""
-        operandTwo = ""
-        operandOne = ""
-        resultView.text = ""
+        firstNumber = ""
+        secondNumber = ""
+        operator = null
         firstInput.text = ""
         secondInput.text = ""
+        resultView.text = ""
+
+        firstInput.textSize = 32f
+        firstInput.height = 200
+        firstInput.layoutParams.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+        firstInput.layoutParams.width = ConstraintLayout.LayoutParams.WRAP_CONTENT
+        firstInput.requestLayout()
+        resetLayouts()
     }
 
     private fun performDelete() {
-        if (isUsed) {
-            operandTwo = operandTwo.dropLast(1)
-            secondInput.text = operandTwo
-        } else {
-            operandOne = operandOne.dropLast(1)
-            firstInput.text = operandOne
+        if (operator == null && firstNumber.isNotEmpty()) {
+            firstNumber = firstNumber.dropLast(1)
+            firstInput.text = firstNumber
+        } else if (operator != null && secondNumber.isNotEmpty()) {
+            secondNumber = secondNumber.dropLast(1)
+            secondInput.text = secondNumber
         }
     }
 
     private fun performEqualTo() {
-        if (isUsed && !isTrigonometry) {
-            if (operator != "/") {
-                result = (parseInt(operandOne) + parseInt(operator) + parseInt(operandTwo)).toString()
-                resultView.text = result
-                operandOne = result
-            } else {
-                try {
-                    result = (parseInt(operandOne) + parseInt(operator) + parseInt(operandTwo)).toString()
-                    resultView.text = result
-                    operandOne = result
-                } catch (e : Exception) {
-                    resultView.text = "∞"
-                }
-            }
-        } else if (isTrigonometry) {
-            val angleDegree = operandTwo
-            val angleRadians = Math.toRadians(parseDouble(angleDegree))
-
-            when (operator) {
-                "sin" -> result = Math.sin(angleRadians).toString()
-                "cos" -> result = Math.cos(angleRadians).toString()
-                "tan" -> result = Math.tan(angleRadians).toString()
+        if (firstNumber.isNotEmpty() && secondNumber.isNotEmpty() && operator != null) {
+            val first = parseDouble(firstNumber)
+            val second = parseDouble(secondNumber)
+            val result = when (operator) {
+                "+" -> first + second
+                "-" -> first - second
+                "*" -> first * second
+                "/" -> first / second
+                "^" -> first.pow(second)
+                else -> 0.0
             }
 
-            resultView.text = result
+            secondInput.text = ""
+            resultView.text = formatResult(result)
+
+            firstNumber = result.toString()
+            secondNumber = ""
+            operator = null
+
+            firstInput.text = firstNumber
+            firstInput.textSize = 14f
+            firstInput.height = 50
+            resultView.text = firstNumber
+            displayResult(result)
         }
-        else {
-            return
+    }
+
+    private fun displayResult(result : Double) {
+        val formattedResult = formatResult(result)
+        firstNumber = formattedResult
+        secondNumber = ""
+        operator = null
+        firstInput.text = formattedResult
+        secondInput.text = ""
+        resultView.text = formattedResult
+        shiftLayoutToResult()
+    }
+
+    private fun formatResult(result: Double): String {
+        return if (result % 1.0 == 0.0) {
+            result.toInt().toString()
+        } else {
+            String.format("%f", result)
         }
+    }
+
+
+    private fun resetLayouts() {
+        firstInput.textSize = 100f
+        secondInput.textSize = 100f
+        resultView.textSize = 100f
+        firstInput.text = ""
+        secondInput.text = ""
+        resultView.text = ""
+    }
+
+    private fun shiftLayout() {
+        firstInput.textSize = 32f
+        secondInput.textSize = 100f
+    }
+
+    private fun shiftLayoutToResult() {
+        firstInput.textSize = 32f
+        resultView.textSize = 100f
+
     }
 }
