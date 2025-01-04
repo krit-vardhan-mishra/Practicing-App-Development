@@ -7,8 +7,19 @@
       </SelectionState>
       <SelectionState runConfigName="PracticeLoginScreen">
         <option name="selectionMode" value="DROPDOWN" />
+        <DropdownSelection timestamp="2025-01-01T10:19:29.890165900Z">
+          <Target type="DEFAULT_BOOT">
+            <handle>
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\theya\.android\avd\Pixel_8a_API_34.avd" />
+            </handle>
+          </Target>
+        </DropdownSelection>
+        <DialogSelection />
       </SelectionState>
       <SelectionState runConfigName="mycalculator">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="ticktakteo">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

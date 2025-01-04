@@ -16,7 +16,8 @@
         app:layout_constraintHeight_percent="0.33"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/cal_input"
-        android:background="@drawable/view_customize">
+        android:background="@drawable/view_customize"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/first_input"
@@ -96,7 +97,8 @@
         android:layout_marginStart="10dp"
         android:background="#0f1417"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/cal_view">
+        app:layout_constraintTop_toBottomOf="@+id/cal_view"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:id="@+id/extra_input"
