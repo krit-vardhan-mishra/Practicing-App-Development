@@ -23,3 +23,4 @@ rootProject.name = "Practicing Android Development"
 include(":app")
 include(":mycalculator")
 include(":ticktakteo")
+include(":taskview")

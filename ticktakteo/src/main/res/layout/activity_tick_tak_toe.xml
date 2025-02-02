@@ -1,130 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-    android:padding="16dp"
-    android:gravity="center">
+    android:background="@color/black" >
 
-    <TextView
-        android:id="@+id/title"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tick Tac Toe"
-        android:textColor="@color/white"
-        android:textSize="45sp"
-        android:layout_marginBottom="50dp"/>
+        android:layout_gravity="top|center"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp">
 
-    <TableLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score:"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
+
+        <TextView
+            android:id="@+id/score_board"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="30sp"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"  >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
 
-        <TableRow
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:text="Tick Tac Toe"
+            android:textColor="@color/white"
+            android:textSize="45sp"
+            android:layout_marginBottom="50dp"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_1"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_2"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_3"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white" />
-        </TableRow>
-
-        <TableRow
+        <TableLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_4"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_5"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_1"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_6"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white" />
-        </TableRow>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_2"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white" />
 
-        <TableRow
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_3"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_4"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_5"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_6"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_7"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_8"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_9"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_margin="5dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white" />
+            </TableRow>
+
+        </TableLayout>
+
+        <Button
+            android:id="@+id/resetButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:text="Reset Game"
+            android:textSize="18sp"
+            android:backgroundTint="@color/orange"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_7"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_8"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_9"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="5dp"
-                android:textSize="40sp"
-                android:textColor="@color/black"
-                android:background="@color/white" />
-        </TableRow>
-
-    </TableLayout>
-
+        </LinearLayout>
     <Button
-        android:id="@+id/resetButton"
+        android:id="@+id/homeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reset Game"
+        android:backgroundTint="@color/red"
+        android:text="Home"
+        android:layout_gravity="end|bottom"
         android:textSize="18sp"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"/>
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"/>
 
-</LinearLayout>
+
+</FrameLayout>

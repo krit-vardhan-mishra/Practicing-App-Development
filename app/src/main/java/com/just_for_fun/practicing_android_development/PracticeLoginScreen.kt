@@ -13,7 +13,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -99,7 +98,7 @@ class PracticeLoginScreen : AppCompatActivity() {
             })
 
             actionButton.startAnimation(rotateAnimation)
-            toggleFabMenu(actionButton, accountButton, rideButton, shareButton, accountView, rideView, shareView)
+            toggleFabMenu(accountButton, rideButton, shareButton, accountView, rideView, shareView)
         }
 
         accountButton.setOnClickListener( {
@@ -115,7 +114,14 @@ class PracticeLoginScreen : AppCompatActivity() {
         })
     }
 
-    private fun toggleFabMenu(actionButton: FloatingActionButton, accountButton: FloatingActionButton, rideButton: FloatingActionButton, shareButton: FloatingActionButton, accountView: TextView, rideView: TextView, shareView: TextView) {
+    private fun toggleFabMenu(
+        accountButton: FloatingActionButton,
+        rideButton: FloatingActionButton,
+        shareButton: FloatingActionButton,
+        accountView: TextView,
+        rideView: TextView,
+        shareView: TextView
+    ) {
 
         val mainLayout = findViewById<ConstraintLayout>(R.id.main)
         val submitButton = findViewById<Button>(R.id.submit)
@@ -129,7 +135,7 @@ class PracticeLoginScreen : AppCompatActivity() {
             val revealAnim = ViewAnimationUtils.createCircularReveal(mainLayout, cx, cy, 0f, finalRadius)
             mainLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.dimmed_background))
             mainLayout.visibility = View.VISIBLE
-            revealAnim.duration = 700
+            revealAnim.duration = 300
             revealAnim.start()
 
             // Show buttons and views
@@ -147,7 +153,7 @@ class PracticeLoginScreen : AppCompatActivity() {
             val initialRadius = hypot(mainLayout.width.toDouble(), mainLayout.height.toDouble()).toFloat()
 
             val hideAnim = ViewAnimationUtils.createCircularReveal(mainLayout, cx, cy, initialRadius, 0f)
-            hideAnim.duration = 700
+            hideAnim.duration = 300
 
             hideAnim.addListener(object : Animator.AnimatorListener {
                 override fun onAnimationStart(animation: Animator) {}

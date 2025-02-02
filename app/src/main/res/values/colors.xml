@@ -118,7 +118,7 @@
         <color name="light_slate_gray">#778899</color>
         <color name="slate_gray">#708090</color>
         <color name="random">#3E403E</color>
-    <color name="dimmed_background">#80000000</color>
+        <color name="dimmed_background">#A5D99769</color>
         <color name="olive_drab">#6B8E23</color>
         <color name="slate_blue">#6A5ACD</color>
         <color name="dim_gray">#696969</color>
