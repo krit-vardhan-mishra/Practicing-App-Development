@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.just_for_fun.taskview-mergeDebugResources-2:/values-watch-v20/values-watch-v20.xml",
+            "map": [
+                {
+                    "source": "E:\\android\\android-gradle\\caches\\8.10.2\\transforms\\eb4ba5504023a61f127012a23143184d\\transformed\\appcompat-1.7.0\\res\\values-watch-v20\\values-watch-v20.xml",
+                    "from": {
+                        "startLines": "2,5,8",
+                        "startColumns": "4,4,4",
+                        "startOffsets": "55,214,385",
+                        "endLines": "4,7,10",
+                        "endColumns": "12,12,12",
+                        "endOffsets": "209,380,553"
+                    }
+                }
+            ]
+        }
+    ]
+}

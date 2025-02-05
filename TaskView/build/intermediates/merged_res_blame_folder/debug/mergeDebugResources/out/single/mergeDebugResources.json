@@ -1,0 +1,102 @@
+[
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/layout_task_input.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/layout/task_input.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable_preview_icon.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable/preview_icon.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable-night_down_arrow.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable-night/down_arrow.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable_down_arrow.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable/down_arrow.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable-night_upload_icon.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable-night/upload_icon.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable_upload_icon.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable/upload_icon.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable_delete_icon.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable/delete_icon.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable_up_arrow.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable/up_arrow.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable-night_preview_icon.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable-night/preview_icon.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/xml_provider_paths.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/xml/provider_paths.xml"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.just_for_fun.taskview-main-6:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.just_for_fun.taskview-debug-4:/drawable-night_up_arrow.xml.flat",
+        "source": "com.just_for_fun.taskview-main-6:/drawable-night/up_arrow.xml"
+    }
+]
