@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Practicing</string>
+    <string name="title"><u>Login-Screen</u></string>
+    <string name="title_account"><u>Account</u></string>
+    <string name="name">Enter Your Name</string>
+    <string name="password">Enter Your Password</string>
+    <string name="email">Enter Your Email Address</string>
+    <string name="name_view">Name:</string>
+    <string name="email_view">Email:</string>
+    <string name="password_view">Password:</string>
+    <string name="submit">Submit</string>
+    <string name="gender_view">Gender:</string>
+    <string name="account_view">Account</string>
+    <string name="ride_view">Ride</string>
+    <string name="share_view">Share</string>
+    <string name="register_yourself">Register Yourself</string>
+    <string name="account_details">Your Account Details:</string>
+
+    <string-array name="spinner_items">
+        <item>None</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>
