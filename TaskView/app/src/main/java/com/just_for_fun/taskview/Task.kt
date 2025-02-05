@@ -1,0 +1,17 @@
+package com.just_for_fun.taskview
+
+import android.net.Uri
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "tasks")
+data class Task (
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @ColumnInfo(name = "title")val title: String,
+    @ColumnInfo(name = "notes")val notes: String,
+    @ColumnInfo(name = "isChecked")val isChecked: Boolean,
+    @ColumnInfo(name = "attachment")val attachment: String?
+) {
+    fun toUri(): Uri? = attachment?.let { Uri.parse(it) }
+}

@@ -1,0 +1,12 @@
+<resources>
+    <!-- Style for TicTacToe Buttons -->
+    <style name="TicTacToeButton">
+        <item name="android:layout_width">90dp</item> <!-- Flexible width -->
+        <item name="android:layout_height">90dp</item> <!-- Flexible height -->
+        <item name="android:layout_margin">5dp</item> <!-- Button margin -->
+        <item name="android:layout_weight">1</item> <!-- Ensures buttons stretch evenly -->
+        <item name="android:textSize">30sp</item> <!-- Text size for X and O -->
+        <item name="android:textColor">@color/black</item> <!-- Text color -->
+        <item name="android:background">@drawable/button_background</item> <!-- Button background (optional) -->
+    </style>
+</resources>
