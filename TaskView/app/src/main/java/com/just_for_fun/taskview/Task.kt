@@ -11,7 +11,8 @@ data class Task (
     @ColumnInfo(name = "title")val title: String,
     @ColumnInfo(name = "notes")val notes: String,
     @ColumnInfo(name = "isChecked")val isChecked: Boolean,
-    @ColumnInfo(name = "attachment")val attachment: String?
+    @ColumnInfo(name = "attachment")val attachment: String?,
+    @ColumnInfo(name = "isExpanded")val isExpanded: Boolean = false
 ) {
     fun toUri(): Uri? = attachment?.let { Uri.parse(it) }
 }
