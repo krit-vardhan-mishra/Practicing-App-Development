@@ -5,5 +5,6 @@ enum class TextStyle {
     ITALIC,
     UNDERLINE,
     STRIKETHROUGH,
-    COLOR
+    COLOR,
+    NORMAL
 }

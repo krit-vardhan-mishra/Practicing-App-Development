@@ -5,10 +5,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-
 class TaskDatabase(context: Context) {
     private val db = AppDatabase.getDatabase(context)
     private val taskDao = db.taskDao()
+    private val formattingDao = db.noteFormattingDao()
 
     fun getAllTask(): Flow<List<Task>> {
         return taskDao.getAllTasks()
@@ -22,27 +22,25 @@ class TaskDatabase(context: Context) {
         return taskDao.getTask()
     }
 
-//    suspend fun insertTask(task: Task): Long {
-//        return withContext(Dispatchers.IO) {
-//            taskDao.insertTask(task)
-//        }
-//    }
-//
-//    suspend fun updateTask(task: Task) {
-//        withContext(Dispatchers.IO) {
-//            taskDao.updateTask(task)
-//        }
-//    }
-//
-//    suspend fun deleteTask(task: Task) {
-//        withContext(Dispatchers.IO) {
-//            taskDao.deleteTask(task)
-//        }
-//    }
-
     suspend fun insertTask(task: Task): Long = taskDao.insertTask(task)
     suspend fun updateTask(task: Task) = taskDao.updateTask(task)
     suspend fun deleteTask(task: Task) = taskDao.deleteTask(task)
+
+    suspend fun insertNoteFormatting(formatting: NoteFormattingEntity): Long {
+        return formattingDao.insertFormatting(formatting)
+    }
+
+    suspend fun getFormattingForTask(taskId: Long): List<NoteFormattingEntity> {
+        return formattingDao.getFormattingForTask(taskId)
+    }
+
+    suspend fun deleteNoteFormatting(formatting: NoteFormattingEntity) {
+        formattingDao.deleteFormatting(formatting)
+    }
+
+    suspend fun deleteFormattingInRange(id: Long, selStart: Int, selEnd: Int) {
+        formattingDao.deleteFormattingInRange(id, selStart, selEnd)
+    }
 
     companion object {
         @Volatile

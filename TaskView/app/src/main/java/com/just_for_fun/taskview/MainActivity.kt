@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.Manifest
 import android.provider.Settings
 import android.util.Log
+import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,25 +28,41 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var emptyTextView: View
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var taskDatabase: TaskDatabase
     private lateinit var filePickerLauncher: ActivityResultLauncher<Array<String>>
     private var currentPickerTask: Task? = null
+    private lateinit var taskViewModel: TaskViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         taskDatabase = TaskDatabase(this)
+        taskViewModel = ViewModelProvider(this, TaskViewModelFactory(taskDatabase))[TaskViewModel::class.java]
         recyclerView = findViewById(R.id.recycler_view)
+        emptyTextView = findViewById(R.id.emptyTextView)
 
         setupRecyclerView()
         setupFilePicker()
         setupFAB()
         observeTasks()
+
+        taskViewModel.allTasks.observe(this) { tasks ->
+            if (tasks.isEmpty()) {
+                recyclerView.visibility = View.GONE
+                emptyTextView.visibility = View.VISIBLE
+            } else {
+                recyclerView.visibility = View.VISIBLE
+                emptyTextView.visibility = View.GONE
+                taskAdapter.submitList(tasks)
+            }
+        }
     }
 
     private fun setupRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
         taskAdapter = TaskAdapter(
             context = this,
             taskDatabase = taskDatabase,
@@ -54,8 +72,6 @@ class MainActivity : AppCompatActivity() {
                 filePickerLauncher.launch(arrayOf("*/*"))
             }
         )
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = taskAdapter
     }
 
@@ -86,7 +102,6 @@ class MainActivity : AppCompatActivity() {
                         )
 
                         Log.d("File Picker", "URI: $uri")
-                        ToastUtil.showCustomToast(this@MainActivity, "URI: $uri")
                         Log.d("File Picker", "Persisted Permission: ${contentResolver.persistedUriPermissions}")
                         Log.d("Task File Picker", "File selected: $uri")
 
@@ -98,16 +113,16 @@ class MainActivity : AppCompatActivity() {
                     } catch (e: SecurityException) {
                         withContext(Dispatchers.Main) {
                             Log.e("Task File Picker", "Permission error: ${e.message}")
-                            ToastUtil.showCustomToast(this@MainActivity, "Permission error: ${e.message}")
+                            ToastUtil.showCustomToast(this@MainActivity, "Permission error: ${e.message}", 2)
                         }
                     } catch (e: Exception) {
                         withContext(Dispatchers.Main) {
                             Log.e("Task File Picker", "Error uploading file: ${e.message}")
-                            ToastUtil.showCustomToast(this@MainActivity, "Error uploading file: ${e.message}")
+                            ToastUtil.showCustomToast(this@MainActivity, "Error uploading file: ${e.message}", 2)
                         }
                     }
                 }
-            } ?: ToastUtil.showCustomToast(this@MainActivity, "No file selected.")
+            } ?: ToastUtil.showCustomToast(this@MainActivity, "No file selected.", 2)
         }
     }
 

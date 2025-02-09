@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Task View</string>
+    <string name="empty_task">No Task at the current time, \nplease click on the <bold>Add Button</bold> on the bottom right corner.</string>
 </resources>

@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
-@Database(entities = [Task::class], version = 1, exportSchema = false)
+@Database(entities = [Task::class, NoteFormattingEntity::class], version = 1, exportSchema = false)
+@TypeConverters(TextStyleConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun taskDao(): TaskDao
+    abstract fun noteFormattingDao(): NoteFormattingDao
 
     companion object {
         @Volatile
