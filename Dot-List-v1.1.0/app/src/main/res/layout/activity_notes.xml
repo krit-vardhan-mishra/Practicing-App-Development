@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="#374955"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NotesActivity">
+
+    <LinearLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="#313439"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/_46sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/back_arrow" />
+
+        <EditText
+            android:id="@+id/notes_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_weight="1"
+            android:hint="Your Task Title"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="8dp" />
+
+        <ImageButton
+            android:id="@+id/points_button"
+            android:layout_width="@dimen/_46sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/hollow_circle"
+            android:backgroundTint="@color/transparent"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/notes_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar">
+
+        <EditText
+            android:id="@+id/notes_area"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:text="Write Your Notes Here"
+            android:textSize="@dimen/_15ssp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/share_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/dodger_blue"
+            android:src="@drawable/export_icon" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/share_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_100sdp"
+        android:gravity="bottom"
+        android:visibility="gone"
+        android:background="@drawable/layout_corners"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/export_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/corners_rounded"/>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
