@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/notes_main"
     android:background="#374955"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,14 +23,14 @@
             android:backgroundTint="@color/transparent"
             android:src="@drawable/back_arrow" />
 
-        <EditText
+        <TextView
             android:id="@+id/notes_title"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
             android:layout_weight="1"
-            android:hint="Your Task Title"
-            android:inputType="text"
-            android:maxLines="1"
+            android:text="Title"
+            android:textSize="@dimen/_20ssp"
+            android:textFontWeight="100"
             android:padding="8dp" />
 
         <ImageButton
@@ -81,14 +81,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/export_button"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_60sdp"
-            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_30sdp"
             android:layout_marginEnd="10dp"
+            android:paddingStart="@dimen/_15sdp"
+            android:paddingEnd="@dimen/_15sdp"
+            android:text="Export notes as pdf"
+            android:textColor="@color/white"
             android:layout_gravity="center_vertical"
-            android:backgroundTint="@color/white"
             android:background="@drawable/corners_rounded"/>
 
     </LinearLayout>

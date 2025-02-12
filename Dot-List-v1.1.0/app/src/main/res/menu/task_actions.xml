@@ -6,5 +6,5 @@
     <item android:id="@+id/action_strikethrough" android:title="@string/strikethrough"/>
     <item android:id="@+id/action_color" android:title="@string/color"/>
     <item android:id="@+id/action_normal" android:title="@string/normal"/>
-    <item android:id="@+id/action_upload" android:title="@string/upload_file" />
+<!--    <item android:id="@+id/action_upload" android:title="@string/upload_file" />-->
 </menu>

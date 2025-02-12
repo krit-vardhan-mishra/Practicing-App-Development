@@ -6,5 +6,6 @@ data class Task(
     val id: String = UUID.randomUUID().toString(),
     var title: String = "",
     var content: String = "",
+    var attachments: MutableList<Attachment> = mutableListOf(),
     var isChecked: Boolean = false
 )

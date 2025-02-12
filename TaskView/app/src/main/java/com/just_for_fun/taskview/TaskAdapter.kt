@@ -29,6 +29,7 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -43,6 +44,8 @@ class TaskAdapter(
 ) : ListAdapter<Task, TaskAdapter.TaskViewHolder>(DiffCallBack()) {
 
     private val expandedItems = mutableListOf<Long>()
+    private var deletedTask: Task? = null
+    private var deletedTaskPosition: Int = -1
 
     class DiffCallBack : DiffUtil.ItemCallback<Task>() {
         override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
@@ -179,6 +182,12 @@ class TaskAdapter(
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 updateArrowVisibility(s?.isNotEmpty() == true)
+                val text = s.toString()
+                if (text.length > 30) {
+                    taskEditText.error = "Title must be less than 30 characters."
+                } else {
+                    taskEditText.error = null
+                }
             }
             override fun afterTextChanged(s: Editable) {
                 taskUpdateJob?.cancel()
@@ -239,6 +248,9 @@ class TaskAdapter(
             if (position == RecyclerView.NO_POSITION) return
 
             val taskToDelete = getItem(position)
+            deletedTask = taskToDelete
+            deletedTaskPosition = position
+
             lifecycleScope.launch {
                 taskDatabase.deleteTask(taskToDelete)
                 val updatedList = currentList.toMutableList().apply {
@@ -247,7 +259,32 @@ class TaskAdapter(
                 submitList(updatedList)
             }
 
-            ToastUtil.showCustomToast(context, "Task Deleted.", 2, RED);
+            showUndoSnackbar()
+        }
+
+        private fun showUndoSnackbar() {
+            val snackbar = Snackbar.make(itemView, "Task Deleted", Snackbar.LENGTH_LONG)
+                .setAction("Undo") {
+                    undoDelete()
+                }
+
+            snackbar.duration = 5000
+            snackbar.show()
+        }
+
+        private fun undoDelete() {
+            deletedTask?.let { task ->
+                val newList = currentList.toMutableList()
+                newList.add(deletedTaskPosition, task)
+                submitList(newList)
+
+                lifecycleScope.launch {
+                    taskDatabase.insertTask(task)
+                }
+
+                deletedTask = null
+                deletedTaskPosition = -1
+            }
         }
 
         private fun setupArrowListeners() {

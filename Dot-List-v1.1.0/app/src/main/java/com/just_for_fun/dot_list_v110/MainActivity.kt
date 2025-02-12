@@ -3,6 +3,7 @@ package com.just_for_fun.dot_list_v110
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -66,7 +67,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // Add new task button click listener
         addTaskButton.setOnClickListener {
             addNewTask()
         }
@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         val newTask = Task()
         taskList.add(newTask)
         adapter.submitList(taskList.toList())
+        checkEmptyState()
     }
 
     private fun openNotesActivity(task: Task) {
