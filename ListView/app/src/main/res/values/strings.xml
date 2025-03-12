@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ListView</string>
+    <string name="add_button">Add Button</string>
+    <string name="delete_button">Delete Button</string>
+    <string name="user_number">USER NUMBER</string>
+    <string name="user_name">USER NAME</string>
+    <string name="user_photo">USER PHOTO</string>
+    <string name="enter_user_name">Enter User Name</string>
+    <string name="enter_user_number">Enter User Number</string>
+    <string name="save">SAVE</string>
+</resources>
