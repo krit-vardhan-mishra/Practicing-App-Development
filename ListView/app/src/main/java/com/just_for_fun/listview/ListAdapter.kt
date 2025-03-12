@@ -9,14 +9,19 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
+import androidx.core.view.marginBottom
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 
 class ListAdapter(private val context: Context, private val contactList: MutableList<ListItem>) : BaseAdapter() {
 
+    private lateinit var cardView: CardView
     override fun getCount(): Int = contactList.size
     override fun getItem(position: Int): Any = contactList[position]
     override fun getItemId(position: Int): Long = position.toLong()
-
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
@@ -27,6 +32,7 @@ class ListAdapter(private val context: Context, private val contactList: Mutable
         val nameView = view.findViewById<TextView>(R.id.list_contact_name)
         val numberView = view.findViewById<TextView>(R.id.list_contact_number)
         val deleteButton = view.findViewById<ImageButton>(R.id.list_contact_delete)
+        cardView = view.findViewById<CardView>(R.id.item_card_view)
 
         nameView.text = contact.name
         numberView.text = contact.number.toString()

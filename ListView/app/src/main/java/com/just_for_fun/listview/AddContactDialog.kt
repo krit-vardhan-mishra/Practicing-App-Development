@@ -26,6 +26,7 @@ class AddContactDialog(private val onContactAdded: (ListItem) -> Unit) : DialogF
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         nameEditText = view.findViewById<EditText>(R.id.enter_contact_name)
         numberEditText = view.findViewById<EditText>(R.id.enter_contact_number)
@@ -58,5 +59,15 @@ class AddContactDialog(private val onContactAdded: (ListItem) -> Unit) : DialogF
             view?.findViewById<ImageView>(R.id.enter_contact_photo)?.setImageURI(selectedImageUri)
             contactPhoto.background = null
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NO_TITLE, android.R.style.ThemeOverlay_Material_Dialog)
     }
 }
