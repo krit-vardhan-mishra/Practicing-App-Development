@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ExpandableListView</string>
+    <string name="expandable_text_view">Expandable Text View</string>
 </resources>
