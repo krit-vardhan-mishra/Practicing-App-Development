@@ -47,6 +47,14 @@ class MainActivity : AppCompatActivity() {
         val adapter = ImageSliderAdapter(images)
         viewPager.adapter = adapter
 
+        // We need to show part of adjacent pages - the key is to set padding
+        // This padding determines how much of adjacent pages will be visible
+        val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.page_margin)
+        val offsetPx = resources.getDimensionPixelOffset(R.dimen.page_offset)
+        viewPager.setPadding(offsetPx, 0, offsetPx, 0)
+        viewPager.clipToPadding = false
+        viewPager.clipChildren = false
+
         // Start from the middle to create infinite scroll effect
         val middlePosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2) % images.size
         viewPager.setCurrentItem(middlePosition, false)
@@ -56,24 +64,15 @@ class MainActivity : AppCompatActivity() {
 
         // Set page transformer for the effect
         val compositePageTransformer = CompositePageTransformer()
-        compositePageTransformer.addTransformer(MarginPageTransformer(40))
-        compositePageTransformer.addTransformer { page, position ->
-            val r = 1 - abs(position)
-            page.scaleY = 0.85f + r * 0.15f
-            page.scaleX = 0.85f + r * 0.15f
+        compositePageTransformer.addTransformer(MarginPageTransformer(pageMarginPx))
 
-            // Adjust alpha for a better looking effect
-            page.alpha = 0.5f + r * 0.5f
-        }
-
+        // No scaling for the poster effect - this keeps every poster at full size
         viewPager.setPageTransformer(compositePageTransformer)
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 // Update indicator
                 setCurrentIndicator(position % images.size)
-
-                // Auto scroll functionality can be added here with Handler
             }
         })
     }

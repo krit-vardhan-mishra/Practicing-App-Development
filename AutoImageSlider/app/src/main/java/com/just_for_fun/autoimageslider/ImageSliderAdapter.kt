@@ -13,6 +13,7 @@ class ImageSliderAdapter(private val images: List<Int>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SliderViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_poster_page, parent, false)
+        // Important: We must use match_parent for width to avoid the ViewPager2 exception
         return SliderViewHolder(view)
     }
 

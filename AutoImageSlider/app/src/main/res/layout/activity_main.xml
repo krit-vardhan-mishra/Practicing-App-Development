@@ -5,21 +5,13 @@
     android:layout_height="match_parent"
     android:background="#121212">
 
-    <FrameLayout
-        android:id="@+id/sliderContainer"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="200dp"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp" />
-    </FrameLayout>
+        android:layout_marginTop="20dp"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/indicatorContainer"
@@ -27,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/sliderContainer"
-        app:layout_constraintEnd_toEndOf="@id/sliderContainer"
-        app:layout_constraintStart_toStartOf="@id/sliderContainer" />
+        app:layout_constraintBottom_toBottomOf="@id/viewPager"
+        app:layout_constraintEnd_toEndOf="@id/viewPager"
+        app:layout_constraintStart_toStartOf="@id/viewPager" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
