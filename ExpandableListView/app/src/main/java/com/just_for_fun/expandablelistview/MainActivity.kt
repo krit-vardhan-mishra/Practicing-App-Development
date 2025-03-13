@@ -2,6 +2,7 @@ package com.just_for_fun.expandablelistview
 
 import android.os.Bundle
 import android.widget.ExpandableListView
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -27,5 +28,17 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = ExpandableListAdapter(this, awardsByCategory)
         expandableListView.setAdapter(adapter)
+
+        expandableListView.setOnGroupExpandListener { groupPosition ->
+            val adapter = expandableListView.expandableListAdapter as ExpandableListAdapter
+            val groupView = adapter.getGroupView(groupPosition, true, null, expandableListView)
+            groupView?.findViewById<ImageView>(R.id.arrowIcon)?.animate()?.rotation(180f)?.setDuration(200)?.start()
+        }
+
+        expandableListView.setOnGroupCollapseListener { groupPosition ->
+            val adapter = expandableListView.expandableListAdapter as ExpandableListAdapter
+            val groupView = adapter.getGroupView(groupPosition, false, null, expandableListView)
+            groupView?.findViewById<ImageView>(R.id.arrowIcon)?.animate()?.rotation(0f)?.setDuration(200)?.start()
+        }
     }
 }

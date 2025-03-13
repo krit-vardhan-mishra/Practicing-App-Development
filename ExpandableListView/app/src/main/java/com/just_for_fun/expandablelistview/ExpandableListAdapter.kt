@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.TranslateAnimation
 import android.widget.BaseExpandableListAdapter
+import android.widget.ImageView
 import android.widget.TextView
 
 class ExpandableListAdapter(private val context: Context, private val awardsMap: Map<String, List<Awards>>): BaseExpandableListAdapter() {
@@ -36,9 +38,14 @@ class ExpandableListAdapter(private val context: Context, private val awardsMap:
     ): View? {
         val categoryName = getGroup(groupPosition) as String
         val view = convertView ?: LayoutInflater.from(context)
-            .inflate(android.R.layout.simple_expandable_list_item_1, parent, false)
-        val textView = view.findViewById<TextView>(android.R.id.text1)
+            .inflate(R.layout.custom_expandable_group, parent, false)
+
+        val textView = view.findViewById<TextView>(R.id.groupTitle)
         textView.text = categoryName
+
+        val arrowIcon = view.findViewById<ImageView>(R.id.arrowIcon)
+        arrowIcon.rotation = if (isExpanded) 180f else 0f
+
         return view
     }
 
@@ -54,6 +61,11 @@ class ExpandableListAdapter(private val context: Context, private val awardsMap:
 
         awardNameYearTextView.text = "${award.name} (${award.year})"
         awardDetailsTextView.text = "${award.category}\n${award.awardName}\n${award.description}"
+
+        val slideIn = TranslateAnimation(0f, 0f, 50f, 0f)
+        slideIn.duration = 300
+        view.startAnimation(slideIn)
+
 
         return view
     }
