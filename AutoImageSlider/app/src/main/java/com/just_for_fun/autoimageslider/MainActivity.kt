@@ -59,9 +59,8 @@ class MainActivity : AppCompatActivity() {
         viewPager.setPageTransformer(pageTransformer)
 
         // 6) Attach TabLayout with ViewPager2
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            // If you want custom text or icons in the tab indicators, set them here.
-            // By default, it will just create the correct number of dots.
+        TabLayoutMediator(tabLayout, viewPager) { tab, _ ->
+            tab.setCustomView(R.layout.custom_tab_dot) // Use a custom dot layout
         }.attach()
 
         // 7) (Optional) Start auto-scroll
