@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="viewpager_page_margin">16dp</dimen>
-    <dimen name="page_margin">8dp</dimen>
-    <dimen name="page_offset">48dp</dimen>
+    <dimen name="page_margin">0dp</dimen>
+    <dimen name="page_offset">40dp</dimen>
 </resources>

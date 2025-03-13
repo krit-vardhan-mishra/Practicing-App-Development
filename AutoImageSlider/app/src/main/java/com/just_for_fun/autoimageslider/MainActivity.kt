@@ -47,31 +47,30 @@ class MainActivity : AppCompatActivity() {
         val adapter = ImageSliderAdapter(images)
         viewPager.adapter = adapter
 
-        // We need to show part of adjacent pages - the key is to set padding
-        // This padding determines how much of adjacent pages will be visible
         val pageMarginPx = resources.getDimensionPixelOffset(R.dimen.page_margin)
         val offsetPx = resources.getDimensionPixelOffset(R.dimen.page_offset)
         viewPager.setPadding(offsetPx, 0, offsetPx, 0)
         viewPager.clipToPadding = false
         viewPager.clipChildren = false
 
-        // Start from the middle to create infinite scroll effect
         val middlePosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2) % images.size
         viewPager.setCurrentItem(middlePosition, false)
 
-        // Reduce slide sensitivity
         viewPager.offscreenPageLimit = 3
 
-        // Set page transformer for the effect
         val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer(pageMarginPx))
 
-        // No scaling for the poster effect - this keeps every poster at full size
+        compositePageTransformer.addTransformer { page, position ->
+            val scaleFactor = 0.85f + (1 - abs(position)) * 0.15f
+            page.scaleY = scaleFactor
+            page.scaleX = scaleFactor
+        }
+
         viewPager.setPageTransformer(compositePageTransformer)
 
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                // Update indicator
                 setCurrentIndicator(position % images.size)
             }
         })
@@ -80,7 +79,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupIndicators() {
         indicators = ArrayList()
 
-        // Clear any existing indicators
         indicatorContainer.removeAllViews()
 
         for (i in images.indices) {
@@ -92,7 +90,12 @@ class MainActivity : AppCompatActivity() {
             layoutParams.setMargins(8, 0, 8, 0)
             indicator.layoutParams = layoutParams
 
-            indicator.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.indicator_inactive))
+            indicator.setImageDrawable(
+                ContextCompat.getDrawable(
+                    this,
+                    R.drawable.indicator_inactive
+                )
+            )
 
             indicatorContainer.addView(indicator)
             indicators.add(indicator)
@@ -110,9 +113,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Auto-scroll functionality
     private fun startAutoScroll() {
-        stopAutoScroll() // Clear any existing auto-scroll
+        stopAutoScroll()
 
         scrollRunnable = Runnable {
             val currentItem = viewPager.currentItem
