@@ -11,10 +11,10 @@ class PosterPagerAdapter(
 ) : RecyclerView.Adapter<PosterPagerAdapter.PosterViewHolder>() {
 
     inner class PosterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val imageView: ImageView = itemView.findViewById(R.id.posterImage)
+//        private val imageView: ImageView = itemView.findViewById(R.id.posterImage)
 
         fun bind(poster: PosterItem) {
-            imageView.setImageResource(poster.imageResId)
+//            imageView.setImageResource(poster.imageResId)
         }
     }
 

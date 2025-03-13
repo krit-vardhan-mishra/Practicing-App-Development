@@ -1,89 +1,142 @@
 package com.just_for_fun.autoimageslider
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import android.os.Handler
 import android.os.Looper
-import java.util.Timer
-import java.util.TimerTask
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewPager: ViewPager2
-    private lateinit var tabLayout: TabLayout
-    private lateinit var adapter: PosterPagerAdapter
+    private lateinit var indicatorContainer: LinearLayout
+    private lateinit var indicators: ArrayList<ImageView>
+
+    private val scrollHandler = Handler(Looper.getMainLooper())
+    private var scrollRunnable: Runnable? = null
+    private val scrollInterval = 3000L
+
+    // Sample images - replace with your actual image resources
+    private val images = listOf(
+        R.drawable.one, R.drawable.two, R.drawable.three, R.drawable.four,
+        R.drawable.five, R.drawable.six, R.drawable.eight, R.drawable.nine,
+        R.drawable.ten, R.drawable.eleven, R.drawable.twelve, R.drawable.thirteen,
+        R.drawable.fourteen, R.drawable.fifteen
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 1) Find Views
         viewPager = findViewById(R.id.viewPager)
-        tabLayout = findViewById(R.id.tab_layout)
+        indicatorContainer = findViewById(R.id.indicatorContainer)
 
-        // 2) Prepare data
-        val posters = listOf(
-            PosterItem(R.drawable.one, "Jawaan 1"),
-            PosterItem(R.drawable.two, "Brahmastra"),
-            PosterItem(R.drawable.three, "Kalki 2894AD"),
-            PosterItem(R.drawable.four, "Jawaan 2"),
-            PosterItem(R.drawable.five, "Bhavesh Joshi SuperHero 1"),
-            PosterItem(R.drawable.six, "Bhavesh Joshi SuperHero 2"),
-            PosterItem(R.drawable.eight, "Jigra"),
-            PosterItem(R.drawable.nine, "Mard Ko Dard Nahi Hota"),
-            PosterItem(R.drawable.ten, "Jawaan 3"),
-            PosterItem(R.drawable.eleven, "Baahubali"),
-            PosterItem(R.drawable.twelve, "Vikram"),
-            PosterItem(R.drawable.thirteen, "War"),
-            PosterItem(R.drawable.fourteen, "Shivaay 1"),
-            PosterItem(R.drawable.fifteen, "Shivaay 2")
-        )
-
-        // 3) Set up Adapter
-        adapter = PosterPagerAdapter(posters)
-        viewPager.adapter = adapter
-
-        // 4) Optional: Adjust offscreen page limit so the adjacent items remain loaded
-        viewPager.offscreenPageLimit = 3
-
-        // 5) Make adjacent items partially visible
-        //    The XML padding + the transformation below will show partial next/previous
-        val pageMarginPx = resources.getDimensionPixelSize(R.dimen.viewpager_page_margin)
-        val pageTransformer = ViewPager2.PageTransformer { page, position ->
-            // This reduces the page’s translation so adjacent pages are partially visible
-            page.translationX = -pageMarginPx * position
-        }
-        viewPager.setPageTransformer(pageTransformer)
-
-        // 6) Attach TabLayout with ViewPager2
-        TabLayoutMediator(tabLayout, viewPager) { tab, _ ->
-            tab.setCustomView(R.layout.custom_tab_dot) // Use a custom dot layout
-        }.attach()
-
-        // 7) (Optional) Start auto-scroll
-        autoScrollViewPager()
+        setupViewPager()
+        setupIndicators()
+        setCurrentIndicator(0)
     }
 
-    // (Optional) Auto-scroll with a Timer/Handler
-    private fun autoScrollViewPager() {
-        val handler = Handler(Looper.getMainLooper())
-        var currentPage = 0
-        val update = Runnable {
-            if (currentPage == adapter.itemCount) {
-                currentPage = 0
-            }
-            viewPager.setCurrentItem(currentPage++, true)
+    private fun setupViewPager() {
+        val adapter = ImageSliderAdapter(images)
+        viewPager.adapter = adapter
+
+        // Start from the middle to create infinite scroll effect
+        val middlePosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2) % images.size
+        viewPager.setCurrentItem(middlePosition, false)
+
+        // Reduce slide sensitivity
+        viewPager.offscreenPageLimit = 3
+
+        // Set page transformer for the effect
+        val compositePageTransformer = CompositePageTransformer()
+        compositePageTransformer.addTransformer(MarginPageTransformer(40))
+        compositePageTransformer.addTransformer { page, position ->
+            val r = 1 - abs(position)
+            page.scaleY = 0.85f + r * 0.15f
+            page.scaleX = 0.85f + r * 0.15f
+
+            // Adjust alpha for a better looking effect
+            page.alpha = 0.5f + r * 0.5f
         }
 
-        val timer = Timer()
-        // Schedule the task to run after DELAY_MS, and repeat every PERIOD_MS
-        timer.schedule(object : TimerTask() {
-            override fun run() {
-                handler.post(update)
+        viewPager.setPageTransformer(compositePageTransformer)
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                // Update indicator
+                setCurrentIndicator(position % images.size)
+
+                // Auto scroll functionality can be added here with Handler
             }
-        }, 2000, 3000) // (delay = 2 seconds, period = 3 seconds)
+        })
+    }
+
+    private fun setupIndicators() {
+        indicators = ArrayList()
+
+        // Clear any existing indicators
+        indicatorContainer.removeAllViews()
+
+        for (i in images.indices) {
+            val indicator = ImageView(this)
+            val layoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            layoutParams.setMargins(8, 0, 8, 0)
+            indicator.layoutParams = layoutParams
+
+            indicator.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.indicator_inactive))
+
+            indicatorContainer.addView(indicator)
+            indicators.add(indicator)
+        }
+    }
+
+    private fun setCurrentIndicator(position: Int) {
+        for (i in indicators.indices) {
+            val drawable = if (i == position) {
+                R.drawable.indicator_active
+            } else {
+                R.drawable.indicator_inactive
+            }
+            indicators[i].setImageDrawable(ContextCompat.getDrawable(this, drawable))
+        }
+    }
+
+    // Auto-scroll functionality
+    private fun startAutoScroll() {
+        stopAutoScroll() // Clear any existing auto-scroll
+
+        scrollRunnable = Runnable {
+            val currentItem = viewPager.currentItem
+            viewPager.setCurrentItem(currentItem + 1, true)
+            scrollHandler.postDelayed(scrollRunnable!!, scrollInterval)
+        }
+
+        scrollHandler.postDelayed(scrollRunnable!!, scrollInterval)
+    }
+
+    private fun stopAutoScroll() {
+        scrollRunnable?.let {
+            scrollHandler.removeCallbacks(it)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        startAutoScroll()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopAutoScroll()
     }
 }
