@@ -2,19 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:tw_clone/signup.dart';
 
 void main() {
-  runApp(
-    const MaterialApp(debugShowCheckedModeBanner: false, home: MyHomePage()),
-  );
+  runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: Login()));
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Login> createState() => _LoginState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LoginState extends State<Login> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey();
@@ -31,12 +29,19 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Image(
+              image: AssetImage('assets/twitter.png'),
+              color: Colors.blue,
+              width: 150,
+              height: 150,
+            ),
+            SizedBox(height: 20 ),
+            Text(
               "Log in to Twitter",
               style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(15, 30, 15, 0),
+              margin: EdgeInsets.fromLTRB(15, 30, 15, 0),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(30),
@@ -44,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Enter Your Email",
                   contentPadding: EdgeInsets.symmetric(
@@ -63,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(15),
+              margin: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(30),
@@ -71,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: TextFormField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Enter Your Password",
                   contentPadding: EdgeInsets.symmetric(
@@ -89,10 +94,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
+            SizedBox(height: 10),
             Container(
               width: 250,
               decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(30),
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(30),
               ),
               child: TextButton(
                 onPressed: () {
@@ -103,16 +110,17 @@ class _MyHomePageState extends State<MyHomePage> {
                     debugPrint("Form is not valid");
                   }
                 },
-                child: const Text("Login", style: TextStyle(color: Colors.white)),
+                child: Text("Login", style: TextStyle(color: Colors.white)),
               ),
             ),
+            SizedBox(height: 20),
             TextButton(
-              onPressed: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Signup()),
-                );
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (context) => Signup()));
               },
-              child: const Text(
+              child: Text(
                 "Don't have an account? Sign up here",
                 style: TextStyle(color: Colors.blue),
               ),

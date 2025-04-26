@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tw_clone/main.dart';
+import 'main.dart';
 
 class Signup extends StatefulWidget {
   const Signup({super.key});
@@ -25,12 +25,19 @@ class _SignupState extends State<Signup> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Image(
+              image: AssetImage('assets/twitter.png'),
+              color: Colors.blue,
+              width: 150,
+              height: 150,
+            ),
+            SizedBox(height: 20 ),
+            Text(
               "Sign Up for Twitter",
               style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             ),
             Container(
-              margin: const EdgeInsets.fromLTRB(15, 30, 15, 0),
+              margin: EdgeInsets.fromLTRB(15, 30, 15, 0),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(30),
@@ -38,7 +45,7 @@ class _SignupState extends State<Signup> {
               child: TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Enter Your Email",
                   contentPadding: EdgeInsets.symmetric(
@@ -57,7 +64,7 @@ class _SignupState extends State<Signup> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.all(15),
+              margin: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(30),
@@ -65,7 +72,7 @@ class _SignupState extends State<Signup> {
               child: TextFormField(
                 controller: _passwordController,
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "Enter Your Password",
                   contentPadding: EdgeInsets.symmetric(
@@ -83,10 +90,12 @@ class _SignupState extends State<Signup> {
                 },
               ),
             ),
+            SizedBox(height: 10),
             Container(
               width: 250,
               decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(30),
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(30),
               ),
               child: TextButton(
                 onPressed: () {
@@ -97,17 +106,18 @@ class _SignupState extends State<Signup> {
                     debugPrint("Form is not valid");
                   }
                 },
-                child: const Text("Login", style: TextStyle(color: Colors.white)),
+                child: Text("Login", style: TextStyle(color: Colors.white)),
               ),
             ),
+            SizedBox(height: 20),
             TextButton(
-              onPressed: () async {
-                await Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Signup()),
-                );
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (context) => Login()));
               },
-              child: const Text(
-                "Don't have an account? Sign up here",
+              child: Text(
+                "Have an account? Log in here",
                 style: TextStyle(color: Colors.blue),
               ),
             ),
