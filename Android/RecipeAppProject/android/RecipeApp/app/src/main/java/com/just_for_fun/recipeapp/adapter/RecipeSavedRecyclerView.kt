@@ -16,7 +16,8 @@ import com.just_for_fun.recipeapp.RecipeDetailsActivity
 import com.just_for_fun.recipeapp.model.Recipe
 import kotlin.jvm.java
 
-class RecipeSavedRecyclerView : ListAdapter<Recipe, RecipeSavedRecyclerView.RecipeSavedViewHolder>(DIFF_CALLBACK) {
+class RecipeSavedRecyclerView :
+    ListAdapter<Recipe, RecipeSavedRecyclerView.RecipeSavedViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Recipe>() {
@@ -35,12 +36,12 @@ class RecipeSavedRecyclerView : ListAdapter<Recipe, RecipeSavedRecyclerView.Reci
         private val recipeTitleView: TextView = itemView.findViewById(R.id.recipe_saved_title)
         private val recipeDateView: TextView = itemView.findViewById(R.id.recipe_saved_date)
         private val recipeTimeView: TextView = itemView.findViewById(R.id.recipe_saved_time)
-        private val recipeDifficultyView: TextView = itemView.findViewById(R.id.recipe_saved_difficulty)
+        private val recipeDifficultyView: TextView =
+            itemView.findViewById(R.id.recipe_saved_difficulty)
         private val recipeRatingView: TextView = itemView.findViewById(R.id.recipe_saved_rating)
-        private val recipeUnsaveButton: ImageButton = itemView.findViewById(R.id.recipe_saved)
+        private val recipeUnsavedButton: ImageButton = itemView.findViewById(R.id.recipe_saved)
 
         fun bind(recipe: Recipe) {
-            // Set recipe data
             recipeImageView.setImageResource(recipe.image)
             recipeTitleView.text = recipe.name
             recipeDateView.text = "Saved on ${recipe.savedDate ?: "Unknown date"}"
@@ -48,19 +49,17 @@ class RecipeSavedRecyclerView : ListAdapter<Recipe, RecipeSavedRecyclerView.Reci
             recipeDifficultyView.text = recipe.difficulty
             recipeRatingView.text = recipe.rating.toString()
 
-            // Handle unsave click
-            recipeUnsaveButton.setOnClickListener {
+            recipeUnsavedButton.setOnClickListener {
                 if (MainActivity.isRecipeSaved(recipe.id)) {
-                    recipeUnsaveButton.setImageResource(R.drawable.bookmark_added)
+                    recipeUnsavedButton.setImageResource(R.drawable.bookmark_added)
                 } else {
-                    recipeUnsaveButton.setImageResource(R.drawable.ic_bookmark_outline)
+                    recipeUnsavedButton.setImageResource(R.drawable.ic_bookmark_outline)
                 }
             }
 
-            // Handle recipe card click
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, RecipeDetailsActivity::class.java)
-                intent.putExtra("recipe_object", recipe)
+                intent.putExtra("recipe_id", recipe.id)
                 itemView.context.startActivity(intent)
             }
         }

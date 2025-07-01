@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recipesTab: TextView
     private lateinit var savedTab: TextView
 
-    // Static list to manage saved recipes (in real app, use database)
     companion object {
         val allRecipes = Recipe.getSampleRecipes().toMutableList()
         val savedRecipes = mutableListOf<Recipe>()
@@ -41,9 +40,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        fun unsaveRecipe(recipe: Recipe) {
+        fun unsavedRecipe(recipe: Recipe) {
             savedRecipes.removeAll { it.id == recipe.id }
-            // Update the recipe in allRecipes
             allRecipes.find { it.id == recipe.id }?.isSaved = false
         }
 
@@ -56,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Handle window insets for status bar
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.top_bar)) { view, insets ->
             val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
             view.updatePadding(top = statusBarInsets.top)
@@ -67,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         setupSearchView()
         setupTabNavigation()
 
-        // Set default fragment
         loadFragment(RecipeFragment())
         updateTabSelection(recipesTab)
     }
@@ -82,7 +78,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupSearchView() {
-        // Customize SearchView appearance
         val searchAutoComplete = searchView.findViewById<AutoCompleteTextView>(
             androidx.appcompat.R.id.search_src_text
         )
@@ -90,18 +85,15 @@ class MainActivity : AppCompatActivity() {
         searchAutoComplete.setHintTextColor(Color.GRAY)
         searchAutoComplete.setTextColor(Color.BLACK)
 
-        // Handle search icon click
         searchIcon.setOnClickListener {
             showSearchView()
         }
 
-        // Handle close button in SearchView
         searchView.setOnCloseListener {
             hideSearchView()
             false
         }
 
-        // Search functionality
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 performSearch(query)
@@ -110,7 +102,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText.isNullOrEmpty()) {
-                    // Reset search when text is cleared
                     resetSearch()
                 } else {
                     performSearch(newText)
@@ -180,7 +171,6 @@ class MainActivity : AppCompatActivity() {
         recipesTab.isSelected = false
         savedTab.isSelected = false
 
-        // Set selected tab
         selectedTab.isSelected = true
     }
 

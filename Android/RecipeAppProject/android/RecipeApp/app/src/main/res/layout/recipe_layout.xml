@@ -18,7 +18,7 @@
 
         <!-- Recipe Image with Overlay -->
         <ImageView
-            android:id="@+id/recipe_image"
+            android:id="@+id/recipe_layout_image"
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:scaleType="centerCrop"
@@ -48,7 +48,7 @@
             app:strokeWidth="0dp">
 
             <ImageButton
-                android:id="@+id/recipe_save"
+                android:id="@+id/recipe_layout_save"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/circular_ripple_background"
@@ -67,20 +67,32 @@
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recipe_image">
+            app:layout_constraintTop_toBottomOf="@id/recipe_layout_image">
 
             <!-- Recipe Title -->
             <TextView
-                android:id="@+id/recipe_title"
+                android:id="@+id/recipe_layout_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
                 android:fontFamily="@font/poppins_bold"
                 android:maxLines="2"
-                android:ellipsize="end"
                 android:text="Delicious Chocolate Lava Cake"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 tools:text="Delicious Chocolate Lava Cake" />
+
+            <!-- Date Saved -->
+            <TextView
+                android:id="@+id/recipe_layout_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Saved on Dec 25, 2024"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                tools:text="Saved on Dec 25, 2024" />
 
             <!-- Recipe Meta Information -->
             <LinearLayout
@@ -104,7 +116,7 @@
                         app:tint="@color/text_secondary" />
 
                     <TextView
-                        android:id="@+id/recipe_time"
+                        android:id="@+id/recipe_layout_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
@@ -129,7 +141,7 @@
                         app:tint="@color/text_secondary" />
 
                     <TextView
-                        android:id="@+id/recipe_difficulty"
+                        android:id="@+id/recipe_layout_difficulty"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
@@ -154,7 +166,7 @@
                         app:tint="@color/rating_color" />
 
                     <TextView
-                        android:id="@+id/recipe_rating"
+                        android:id="@+id/recipe_layout_rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"

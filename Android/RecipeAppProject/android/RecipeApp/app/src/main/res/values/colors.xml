@@ -19,13 +19,9 @@
     <color name="overlay_background">#80000000</color>
 
     <!-- Text Colors -->
-    <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
     <color name="text_white">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
-    <color name="gray">#808080</color>
-    <color name="gray_dark"> #A9A9A9</color>
-    <color name="yellow">#FF9800</color>
     <color name="placeholder_background">#F0F0F0</color>
 
     <!-- Tab Colors -->
@@ -49,4 +45,31 @@
     <!-- Ripple Colors -->
     <color name="ripple_color">#1F000000</color>
     <color name="ripple_color_light">#1AFFFFFF</color>
+
+    <color name="primary_color_dark">#E55A2B</color>
+    <color name="accent_color">#4CAF50</color>
+
+    <!-- Gray Shades -->
+    <color name="gray">#9E9E9E</color>
+    <color name="gray_light">#F5F5F5</color>
+    <color name="gray_dark">#424242</color>
+    <color name="gray_medium">#757575</color>
+
+    <!-- Other Colors -->
+    <color name="yellow">#FFD700</color>
+    <color name="red">#F44336</color>
+    <color name="green">#4CAF50</color>
+    <color name="blue">#2196F3</color>
+
+    <!-- Background Colors -->
+    <color name="background_light">#FAFAFA</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>
+
+    <!-- Background colors -->
+    <color name="blur_overlay_background">#80000000</color>
+    <color name="image_placeholder_background">#F5F5F5</color>
+    <color name="button_secondary_background">#F8F9FA</color>
+    <color name="stroke_color">#E0E0E0</color>
 </resources>

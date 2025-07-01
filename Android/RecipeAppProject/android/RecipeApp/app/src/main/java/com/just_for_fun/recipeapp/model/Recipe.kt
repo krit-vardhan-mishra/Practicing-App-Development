@@ -18,7 +18,7 @@ data class Recipe(
     var isSaved: Boolean = false,
     val savedDate: String? = null,
     val createdDate: String = ""
-) : Parcelable { // Implement Parcelable
+) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
@@ -95,6 +95,7 @@ data class Recipe(
                         "Carefully invert onto plates and serve immediately with a scoop of ice cream or fresh berries."
                     ),
                     servings = 2,
+                    savedDate = "Dec 25, 2024",
                     createdDate = "Dec 20, 2024"
                 ),
                 Recipe(
@@ -125,6 +126,7 @@ data class Recipe(
                         "Remove from oven, scatter fresh basil leaves over the hot pizza, and drizzle with the remaining olive oil before slicing and serving."
                     ),
                     servings = 4,
+                    savedDate = "Dec 25, 2024",
                     createdDate = "Dec 18, 2024"
                 ),
                 Recipe(
@@ -160,6 +162,7 @@ data class Recipe(
                         "Garnish with fresh cilantro before serving hot with rice or naan bread."
                     ),
                     servings = 6,
+                    savedDate = "Dec 25, 2024",
                     createdDate = "Dec 15, 2024"
                 ),
                 Recipe(
@@ -192,7 +195,95 @@ data class Recipe(
                         "Serve immediately as a side or a light meal."
                     ),
                     servings = 2,
+                    savedDate = "Dec 25, 2024",
                     createdDate = "Dec 22, 2024"
+                ),
+                Recipe(
+                    id = 5,
+                    name = "Pasta Carbonara",
+                    image = R.drawable.pasta_carbonara,
+                    cookingTime = "25 mins",
+                    difficulty = "Easy",
+                    rating = 4.5f,
+                    description = "Classic Italian pasta dish with eggs, cheese, pancetta, and pepper.",
+                    ingredients = listOf(
+                        "200g spaghetti",
+                        "2 large eggs",
+                        "50g Pecorino Romano cheese, grated",
+                        "100g pancetta, diced",
+                        "Black pepper to taste",
+                        "Salt to taste"
+                    ),
+                    instructions = listOf(
+                        "Cook the spaghetti in salted boiling water until al dente. Reserve 1/4 cup of the pasta water.",
+                        "Fry the pancetta in a skillet until crispy, then remove from heat.",
+                        "In a bowl, whisk together eggs and grated cheese.",
+                        "Quickly mix the drained hot pasta with the pancetta.",
+                        "Add the egg-cheese mixture, tossing quickly to coat and create a creamy sauce.",
+                        "Use reserved pasta water to loosen the sauce if needed.",
+                        "Season with freshly cracked black pepper and serve immediately."
+                    ),
+                    servings = 4,
+                    savedDate = "Dec 25, 2024",
+                    createdDate = "2023-10-25"
+                ),
+                Recipe(
+                    id = 6,
+                    name = "Beef Steak",
+                    image = R.drawable.beef_steak,
+                    cookingTime = "15 mins",
+                    difficulty = "Medium",
+                    rating = 4.9f,
+                    description = "Perfectly seared beef steak, juicy and flavorful.",
+                    ingredients = listOf(
+                        "1 beef steak (ribeye or sirloin)",
+                        "Salt and pepper to taste",
+                        "1 tbsp olive oil",
+                        "2 cloves garlic, crushed",
+                        "1 sprig rosemary or thyme",
+                        "1 tbsp butter"
+                    ),
+                    instructions = listOf(
+                        "Take the steak out of the fridge 30 minutes before cooking and season with salt and pepper.",
+                        "Heat a skillet until very hot, then add olive oil.",
+                        "Sear the steak for 2–3 minutes on each side for medium-rare, or adjust to desired doneness.",
+                        "Add butter, garlic, and herbs to the pan and baste the steak for 1–2 minutes.",
+                        "Let the steak rest for 5 minutes before slicing and serving."
+                    ),
+                    servings = 1,
+                    savedDate = "Dec 25, 2024",
+                    createdDate = "2023-10-23"
+                ),
+                Recipe(
+                    id = 7,
+                    name = "Fish Tacos",
+                    image = R.drawable.fish_tacos,
+                    cookingTime = "35 mins",
+                    difficulty = "Easy",
+                    rating = 4.7f,
+                    description = "Delicious and fresh fish tacos with a zesty slaw.",
+                    ingredients = listOf(
+                        "300g white fish fillets (cod or tilapia)",
+                        "1 tsp chili powder",
+                        "1/2 tsp cumin",
+                        "Salt and pepper to taste",
+                        "1 tbsp olive oil",
+                        "1 cup shredded cabbage",
+                        "1/4 cup sour cream",
+                        "1 tbsp lime juice",
+                        "Fresh cilantro, chopped",
+                        "6 corn tortillas"
+                    ),
+                    instructions = listOf(
+                        "Season the fish with chili powder, cumin, salt, and pepper.",
+                        "Heat olive oil in a pan and cook the fish for 3–4 minutes per side until flaky. Set aside.",
+                        "In a bowl, mix cabbage with sour cream, lime juice, and cilantro to make slaw.",
+                        "Warm the corn tortillas in a dry skillet or microwave.",
+                        "Assemble tacos with pieces of fish and slaw. Serve immediately with extra lime wedges."
+                    ),
+                    servings = 3,
+                    savedDate = "Dec 25, 2024",
+                    createdDate = "2023-10-21"
                 )
             )
         }

@@ -40,6 +40,12 @@
         app:rippleColor="@color/primary_light"
         app:tint="@android:color/white" />
 
+    <include
+        android:id="@+id/add_recipe_layout"
+        layout="@layout/add_recipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <!-- Empty State View -->
     <LinearLayout
         android:id="@+id/empty_state"

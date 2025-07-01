@@ -2,11 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white">
 
+    <!-- Custom Toolbar -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
@@ -58,6 +59,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <!-- Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -70,6 +72,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- Recipe Image -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
@@ -79,6 +82,7 @@
 
                 <ImageView
                     android:id="@+id/recipe_image"
+                    android:src="@drawable/lava_cake"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop" />
@@ -91,8 +95,11 @@
                     android:layout_margin="12dp"
                     android:background="@drawable/circle_background"
                     android:contentDescription="Save recipe"
-                    android:src="@drawable/ic_bookmark_filled" /> </androidx.cardview.widget.CardView>
+                    android:src="@drawable/ic_bookmark_filled" />
 
+            </androidx.cardview.widget.CardView>
+
+            <!-- Recipe Title -->
             <TextView
                 android:id="@+id/recipe_title"
                 android:layout_width="match_parent"
@@ -104,6 +111,7 @@
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
+            <!-- Quick Info Row -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,6 +119,7 @@
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
+                <!-- Cooking Time -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -145,6 +154,7 @@
 
                 </LinearLayout>
 
+                <!-- Difficulty -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -179,6 +189,7 @@
 
                 </LinearLayout>
 
+                <!-- Servings -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -213,6 +224,7 @@
 
                 </LinearLayout>
 
+                <!-- Rating -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -249,6 +261,7 @@
 
             </LinearLayout>
 
+            <!-- Description Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -277,6 +290,7 @@
 
             </LinearLayout>
 
+            <!-- Ingredients Section -->
             <LinearLayout
                 android:id="@+id/ingredients_section"
                 android:layout_width="match_parent"
@@ -303,6 +317,7 @@
 
             </LinearLayout>
 
+            <!-- Instructions Section -->
             <LinearLayout
                 android:id="@+id/instructions_section"
                 android:layout_width="match_parent"
@@ -329,6 +344,7 @@
 
             </LinearLayout>
 
+            <!-- Bottom Spacing -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="24dp" />

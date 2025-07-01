@@ -30,43 +30,39 @@ class RecipeRecyclerView : ListAdapter<Recipe, RecipeRecyclerView.RecipeViewHold
     }
 
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val recipeImageView: ImageView = itemView.findViewById(R.id.recipe_image)
-        private val recipeTitleView: TextView = itemView.findViewById(R.id.recipe_title)
-        private val recipeTimeView: TextView = itemView.findViewById(R.id.recipe_time)
-        private val recipeDifficultyView: TextView = itemView.findViewById(R.id.recipe_difficulty)
-        private val recipeRatingView: TextView = itemView.findViewById(R.id.recipe_rating)
-        private val recipeSaveButton: ImageButton = itemView.findViewById(R.id.recipe_save) // Assuming this is the save button in recipe_layout
+        private val recipeImageView: ImageView = itemView.findViewById(R.id.recipe_layout_image)
+        private val recipeTitleView: TextView = itemView.findViewById(R.id.recipe_layout_title)
+        private val recipeDateView: TextView = itemView.findViewById(R.id.recipe_layout_date)
+        private val recipeTimeView: TextView = itemView.findViewById(R.id.recipe_layout_time)
+        private val recipeDifficultyView: TextView = itemView.findViewById(R.id.recipe_layout_difficulty)
+        private val recipeRatingView: TextView = itemView.findViewById(R.id.recipe_layout_rating)
+        private val recipeSaveButton: ImageButton = itemView.findViewById(R.id.recipe_layout_save)
 
         fun bind(recipe: Recipe) {
-            // Set recipe data
             recipeImageView.setImageResource(recipe.image)
             recipeTitleView.text = recipe.name
+            recipeDateView.text = "Saved on ${recipe.savedDate ?: "Unknown date"}"
             recipeTimeView.text = recipe.cookingTime
             recipeDifficultyView.text = recipe.difficulty
             recipeRatingView.text = recipe.rating.toString()
 
-            // Update save button state based on whether the recipe is saved
             updateSaveButtonState(recipe)
 
-            // Handle save/unsave click
             recipeSaveButton.setOnClickListener {
-                if (MainActivity.isRecipeSaved(recipe.id)) { // Check if saved using MainActivity's state
-                    // Unsave recipe
-                    MainActivity.unsaveRecipe(recipe)
-                    recipe.isSaved = false // Update local state for immediate UI feedback
+                if (MainActivity.isRecipeSaved(recipe.id)) {
+                    MainActivity.unsavedRecipe(recipe)
+                    recipe.isSaved = false
                     updateSaveButtonState(recipe)
                 } else {
-                    // Save recipe
                     MainActivity.saveRecipe(recipe)
-                    recipe.isSaved = true // Update local state for immediate UI feedback
+                    recipe.isSaved = true
                     updateSaveButtonState(recipe)
                 }
             }
 
-            // Handle recipe card click to open RecipeDetailsActivity
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, RecipeDetailsActivity::class.java)
-                intent.putExtra("recipe_object", recipe) // Pass the Recipe object
+                intent.putExtra("recipe_id", recipe.id)
                 itemView.context.startActivity(intent)
             }
         }
@@ -74,10 +70,10 @@ class RecipeRecyclerView : ListAdapter<Recipe, RecipeRecyclerView.RecipeViewHold
         private fun updateSaveButtonState(recipe: Recipe) {
             val isSaved = MainActivity.isRecipeSaved(recipe.id)
             if (isSaved) {
-                recipeSaveButton.setImageResource(R.drawable.bookmark_added) // Ensure this icon exists and represents "saved"
+                recipeSaveButton.setImageResource(R.drawable.bookmark_added)
                 recipeSaveButton.contentDescription = "Remove from saved"
             } else {
-                recipeSaveButton.setImageResource(R.drawable.ic_bookmark_filled) // Ensure this icon exists and represents "unsaved"
+                recipeSaveButton.setImageResource(R.drawable.ic_bookmark_filled)
                 recipeSaveButton.contentDescription = "Save recipe"
             }
         }

@@ -12,7 +12,6 @@ import com.google.android.material.button.MaterialButton
 import com.just_for_fun.recipeapp.MainActivity
 import com.just_for_fun.recipeapp.R
 import com.just_for_fun.recipeapp.adapter.RecipeSavedRecyclerView
-import com.just_for_fun.recipeapp.model.Recipe
 
 class SavedFragment : Fragment() {
 
@@ -35,12 +34,10 @@ class SavedFragment : Fragment() {
         initViews(view)
         setupRecyclerView()
         setupEmptyState()
-        // loadSavedRecipes() // Load recipes in onResume for real-time updates
     }
 
     override fun onResume() {
         super.onResume()
-        // Refresh the saved recipes list every time the fragment is resumed
         loadSavedRecipes()
     }
 
@@ -55,26 +52,22 @@ class SavedFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
 
-        // Add spacing between items
         val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
         recyclerView.addItemDecoration(GridSpacingItemDecoration(2, spacing, true))
     }
 
     private fun setupEmptyState() {
         btnExploreRecipes.setOnClickListener {
-            // Navigate back to recipes tab
             (requireActivity() as? MainActivity)?.switchToRecipesTab()
         }
     }
 
     fun resetSearch() {
-        // When search is reset in SavedFragment, show all saved recipes
         adapter.submitList(MainActivity.savedRecipes)
         updateEmptyState(MainActivity.savedRecipes.isEmpty())
     }
 
     private fun loadSavedRecipes() {
-        // Submit the actual saved recipes from MainActivity
         adapter.submitList(MainActivity.savedRecipes.toList())
         updateEmptyState(MainActivity.savedRecipes.isEmpty())
     }
@@ -98,7 +91,6 @@ class SavedFragment : Fragment() {
         }
     }
 
-    // Custom ItemDecoration for grid spacing
     inner class GridSpacingItemDecoration(
         private val spanCount: Int,
         private val spacing: Int,
