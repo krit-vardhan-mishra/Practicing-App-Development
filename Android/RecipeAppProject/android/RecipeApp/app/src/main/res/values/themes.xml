@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.RecipeApp" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- You can optionally customize more here -->
+    <style name="Theme.RecipeApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Customize colors -->
         <item name="colorPrimary">#6200EE</item>
         <item name="colorPrimaryDark">#3700B3</item>
         <item name="colorAccent">#03DAC5</item>
+
+        <!-- Status bar configuration -->
+        <item name="android:statusBarColor">@color/primary_color</item> <!-- Transparent status bar -->
+<!--        <item name="android:windowLightStatusBar">true</item> &lt;!&ndash; Optional: Light icons on status bar &ndash;&gt;-->
+<!--        <item name="android:windowTranslucentStatus">false</item> &lt;!&ndash; Ensure status bar is not translucent unless desired &ndash;&gt;-->
+        <item name="android:fitsSystemWindows">true</item> <!-- Ensure content fits system windows -->
+
+        <!-- Ensure content starts below status bar -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 </resources>

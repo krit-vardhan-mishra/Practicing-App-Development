@@ -1,5 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Recipe App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Recipe Delights</string>
+
+    <!-- Navigation -->
+    <string name="recipes_tab">Recipes</string>
+    <string name="saved_tab">Saved</string>
+
+    <!-- Search -->
+    <string name="search_hint">Search delicious recipes…</string>
+    <string name="search_description">Search</string>
+
+    <!-- Recipe Actions -->
+    <string name="save_recipe">Save Recipe</string>
+    <string name="unsave_recipe">Remove from Saved</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="share_recipe">Share Recipe</string>
+
+    <!-- Empty States -->
+    <string name="no_recipes_title">No Recipes Yet</string>
+    <string name="no_recipes_subtitle">Add your first recipe to get started</string>
+    <string name="no_saved_recipes_title">No Saved Recipes</string>
+    <string name="no_saved_recipes_subtitle">Save your favorite recipes to view them here</string>
+    <string name="explore_recipes">Explore Recipes</string>
+
+    <!-- Recipe Details -->
+    <string name="cooking_time">Cooking Time</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="rating">Rating</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="servings">Servings</string>
+
+    <!-- Difficulty Levels -->
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="difficulty_hard">Hard</string>
+
+    <!-- Time Units -->
+    <string name="minutes">min</string>
+    <string name="hours">hr</string>
+
+    <!-- Recipe Status -->
+    <string name="saved_on">Saved on %s</string>
+    <string name="created_on">Created on %s</string>
+
+    <!-- Messages -->
+    <string name="recipe_saved">Recipe saved successfully</string>
+    <string name="recipe_removed">Recipe removed from saved</string>
+    <string name="recipe_added">Recipe added successfully</string>
+
+    <!-- Buttons -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="done">Done</string>
 </resources>

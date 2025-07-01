@@ -3,6 +3,7 @@ import { Schema, model } from 'mongoose';
 const recipeSchema = new Schema({
   name: { type: String, required: true },
   isSaved: { type: Boolean, default: false },
+  image: {type: Int32Array, default: 0},
 });
 
 // Use static, not method
