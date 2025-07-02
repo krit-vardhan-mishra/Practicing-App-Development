@@ -12,13 +12,15 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
+import com.just_for_fun.recipeapp.fragments.AddRecipeLayout
 import com.just_for_fun.recipeapp.fragments.RecipeFragment
 import com.just_for_fun.recipeapp.fragments.SavedFragment
 import com.just_for_fun.recipeapp.model.Recipe
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import androidx.core.view.isVisible
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AddRecipeLayout.AddRecipeListener {
 
     private lateinit var searchView: SearchView
     private lateinit var searchIcon: ImageView
@@ -33,7 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         fun saveRecipe(recipe: Recipe) {
             if (!savedRecipes.any { it.id == recipe.id }) {
-                val currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy"))
+                val currentDate =
+                    LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy"))
                 val savedRecipe = recipe.copy(isSaved = true, savedDate = currentDate)
                 savedRecipes.add(savedRecipe)
                 allRecipes.find { it.id == recipe.id }?.isSaved = true
@@ -138,7 +141,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun performSearch(query: String?) {
         query?.let {
-            // Get current fragment and perform search
             val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment)
             when (currentFragment) {
                 is RecipeFragment -> currentFragment.searchRecipes(it)
@@ -167,18 +169,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTabSelection(selectedTab: TextView) {
-        // Reset all tabs
         recipesTab.isSelected = false
         savedTab.isSelected = false
 
         selectedTab.isSelected = true
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
-        if (searchView.visibility == View.VISIBLE) {
+        val addRecipeLayout =
+            supportFragmentManager.findFragmentById(R.id.add_recipe_container) as? AddRecipeLayout
+        if (addRecipeLayout != null && addRecipeLayout.view?.visibility == View.VISIBLE) {
+            addRecipeLayout.hide()
+            addRecipeLayout.clearForm()
+        } else if (searchView.isVisible) {
             hideSearchView()
         } else {
             super.onBackPressed()
+        }
+    }
+
+    override fun onRecipeAdded(recipe: Recipe) {
+        allRecipes.add(recipe)
+        refreshRecipeFragment()
+    }
+
+    private fun refreshRecipeFragment() {
+        supportFragmentManager.findFragmentById(R.id.fragment)?.let {
+            if (it is RecipeFragment) it.loadRecipes()
         }
     }
 }

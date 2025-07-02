@@ -52,7 +52,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/circular_ripple_background"
-                android:contentDescription="Save Recipe"
+                android:contentDescription="@string/save_recipe"
                 android:padding="8dp"
                 android:src="@drawable/ic_bookmark_outline"
                 app:tint="@color/primary_color" />
@@ -77,7 +77,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/poppins_bold"
                 android:maxLines="2"
-                android:text="Delicious Chocolate Lava Cake"
+                android:text="@string/delicious_chocolate_lava_cake"
                 android:textColor="@color/text_primary"
                 android:textSize="18sp"
                 tools:text="Delicious Chocolate Lava Cake" />
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Saved on Dec 25, 2024"
+                android:text="@string/saved_on_dec_25_2024"
                 android:textColor="@color/text_secondary"
                 android:textSize="12sp"
                 tools:text="Saved on Dec 25, 2024" />
@@ -121,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="25 min"
+                        android:text="@string/_25_min"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -146,7 +146,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Medium"
+                        android:text="@string/medium"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="4.8"
+                        android:text="@string/_4_8"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>

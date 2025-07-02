@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- add recipe layout -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -59,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Add New Recipe"
+                        android:text="@string/add_new_recipe"
                         android:textColor="@color/text_primary"
                         android:textSize="24sp" />
 
@@ -68,7 +69,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:background="@drawable/circular_ripple_background"
-                        android:contentDescription="Close"
+                        android:contentDescription="@string/close"
                         android:padding="8dp"
                         android:src="@drawable/ic_close"
                         app:tint="@color/text_secondary" />
@@ -93,6 +94,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@color/image_placeholder_background"
+                            android:contentDescription="@string/recipe_image_preview"
                             android:scaleType="centerCrop"
                             android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -114,6 +116,7 @@
                             <ImageView
                                 android:layout_width="48dp"
                                 android:layout_height="48dp"
+                                android:contentDescription="@string/camera_drawable"
                                 android:src="@drawable/ic_camera"
                                 app:tint="@color/text_secondary" />
 
@@ -122,7 +125,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:fontFamily="@font/poppins_regular"
-                                android:text="Add Recipe Photo"
+                                android:text="@string/add_recipe_photo"
                                 android:textColor="@color/text_secondary"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -145,7 +148,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:hint="Recipe Name"
+                    android:hint="@string/recipe_name"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -175,7 +178,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-                        android:hint="Cooking Time"
+                        android:hint="@string/cooking_time"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -200,7 +203,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:hint="Servings"
+                        android:hint="@string/servings"
                         app:boxCornerRadiusBottomEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
@@ -221,17 +224,17 @@
 
                 <!-- Difficulty Dropdown -->
                 <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Difficulty Level"
+                    android:hint="@string/difficulty_level"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
                     app:boxCornerRadiusTopStart="12dp"
                     app:boxStrokeColor="@color/primary_color"
-                    app:hintTextColor="@color/text_secondary"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                    app:hintTextColor="@color/text_secondary">
 
                     <AutoCompleteTextView
                         android:id="@+id/et_difficulty"
@@ -248,7 +251,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Description (Optional)"
+                    android:hint="@string/description_optional"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -262,11 +265,11 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="top"
+                        android:importantForAutofill="no"
                         android:inputType="textMultiLine"
                         android:lines="3"
                         android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:importantForAutofill="no"/>
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Ingredients Section -->
@@ -275,7 +278,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Ingredients"
+                    android:text="@string/ingredients"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp" />
 
@@ -283,7 +286,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="Add ingredients (one per line)"
+                    android:hint="@string/add_ingredients"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -297,11 +300,11 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="top"
+                        android:importantForAutofill="no"
                         android:inputType="textMultiLine"
                         android:lines="4"
                         android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:importantForAutofill="no"/>
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Instructions Section -->
@@ -310,7 +313,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Instructions"
+                    android:text="@string/instructions"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp" />
 
@@ -318,7 +321,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:hint="Add cooking instructions (step by step)"
+                    android:hint="@string/add_cooking_instructions_step_by_step"
                     app:boxCornerRadiusBottomEnd="12dp"
                     app:boxCornerRadiusBottomStart="12dp"
                     app:boxCornerRadiusTopEnd="12dp"
@@ -332,11 +335,11 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="top"
+                        android:importantForAutofill="no"
                         android:inputType="textMultiLine"
                         android:lines="5"
                         android:textColor="@color/text_primary"
-                        android:textSize="16sp"
-                        android:importantForAutofill="no"/>
+                        android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Action Buttons -->
@@ -349,19 +352,19 @@
                     <!-- Cancel Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_cancel"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="0dp"
                         android:layout_height="56dp"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Cancel"
+                        android:text="@string/cancel"
                         android:textColor="@color/text_secondary"
                         android:textSize="16sp"
                         app:backgroundTint="@color/button_secondary_background"
                         app:cornerRadius="16dp"
                         app:strokeColor="@color/stroke_color"
-                        app:strokeWidth="1dp"
-                        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                        app:strokeWidth="1dp" />
 
                     <!-- Save Button -->
                     <com.google.android.material.button.MaterialButton
@@ -371,7 +374,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Save Recipe"
+                        android:text="@string/save_recipe"
                         android:textColor="@android:color/white"
                         android:textSize="16sp"
                         app:backgroundTint="@color/primary_color"

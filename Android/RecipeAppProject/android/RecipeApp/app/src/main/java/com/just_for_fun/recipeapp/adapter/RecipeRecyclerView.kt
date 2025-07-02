@@ -1,5 +1,6 @@
 package com.just_for_fun.recipeapp.adapter
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,7 @@ import com.just_for_fun.recipeapp.R
 import com.just_for_fun.recipeapp.RecipeDetailsActivity
 import com.just_for_fun.recipeapp.model.Recipe
 
-class RecipeRecyclerView : ListAdapter<Recipe, RecipeRecyclerView.RecipeViewHolder>(DIFF_CALLBACK) {
+class RecipeRecyclerView(requireContext: Context, toList: List<Recipe>) : ListAdapter<Recipe, RecipeRecyclerView.RecipeViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Recipe>() {
@@ -87,5 +88,9 @@ class RecipeRecyclerView : ListAdapter<Recipe, RecipeRecyclerView.RecipeViewHold
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         holder.bind(getItem(position))
+    }
+
+    fun updateRecipes(newRecipes: List<Recipe>) {
+        submitList(newRecipes)
     }
 }

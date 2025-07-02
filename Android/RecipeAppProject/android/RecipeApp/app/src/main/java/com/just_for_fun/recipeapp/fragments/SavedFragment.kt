@@ -53,7 +53,7 @@ class SavedFragment : Fragment() {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
 
         val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
-        recyclerView.addItemDecoration(GridSpacingItemDecoration(2, spacing, true))
+        recyclerView.addItemDecoration(GridSpacingItemDecoration(1, spacing, true))
     }
 
     private fun setupEmptyState() {

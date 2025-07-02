@@ -1,11 +1,11 @@
 package com.just_for_fun.recipeapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +20,7 @@ class RecipeFragment : Fragment() {
     private lateinit var adapter: RecipeRecyclerView
     private lateinit var fabAddRecipe: FloatingActionButton
     private lateinit var emptyState: LinearLayout
+    private lateinit var addRecipeLayout: AddRecipeLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,25 +32,20 @@ class RecipeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initViews(view)
         setupRecyclerView()
         setupFab()
         loadRecipes()
-    }
 
-    fun searchRecipes(query: String) {
-        val filteredList = MainActivity.allRecipes.filter {
-            it.name.contains(query, ignoreCase = true) ||
-                    it.description.contains(query, ignoreCase = true)
-        }
-        adapter.submitList(filteredList)
-        updateEmptyState(filteredList.isEmpty())
-    }
-
-    fun resetSearch() {
-        adapter.submitList(MainActivity.allRecipes)
-        updateEmptyState(MainActivity.allRecipes.isEmpty())
+        // Initialize AddRecipeLayout
+        addRecipeLayout = childFragmentManager.findFragmentByTag("AddRecipeLayoutTag") as? AddRecipeLayout
+            ?: AddRecipeLayout().also {
+                childFragmentManager.beginTransaction()
+                    .add(R.id.add_recipe_container, it, "AddRecipeLayoutTag")
+                    .commit()
+                Log.d("RecipeFragment", "AddRecipeLayout added")
+            }
+        addRecipeLayout.setAddRecipeListener(activity as? MainActivity)
     }
 
     private fun initViews(view: View) {
@@ -59,25 +55,37 @@ class RecipeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        adapter = RecipeRecyclerView()
-        recyclerView.adapter = adapter
+        adapter = RecipeRecyclerView(requireContext(), MainActivity.allRecipes.toList())
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 1)
+        recyclerView.adapter = adapter
 
-        val spacing = resources.getDimensionPixelSize(R.dimen.grid_spacing)
-        recyclerView.addItemDecoration(GridSpacingItemDecoration(2, spacing, true))
+        val spacingInPixels = resources.getDimensionPixelSize(R.dimen.grid_spacing)
+        recyclerView.addItemDecoration(GridSpacingItemDecoration(1, spacingInPixels, true))
     }
 
     private fun setupFab() {
         fabAddRecipe.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment, AddRecipeLayout())
-                .addToBackStack(null)
-                .commit()
+            addRecipeLayout.show()
         }
     }
 
-    private fun loadRecipes() {
-        adapter.submitList(MainActivity.allRecipes.toList())
+    fun loadRecipes() {
+        adapter.updateRecipes(MainActivity.allRecipes.toList())
+        updateEmptyState(MainActivity.allRecipes.isEmpty())
+    }
+
+    fun searchRecipes(query: String) {
+        val filteredList = MainActivity.allRecipes.filter {
+            it.name.contains(query, ignoreCase = true) ||
+                    it.description.contains(query, ignoreCase = true) ||
+                    it.ingredients.any { ingredient -> ingredient.contains(query, ignoreCase = true) }
+        }
+        adapter.updateRecipes(filteredList)
+        updateEmptyState(filteredList.isEmpty())
+    }
+
+    fun resetSearch() {
+        adapter.updateRecipes(MainActivity.allRecipes.toList())
         updateEmptyState(MainActivity.allRecipes.isEmpty())
     }
 

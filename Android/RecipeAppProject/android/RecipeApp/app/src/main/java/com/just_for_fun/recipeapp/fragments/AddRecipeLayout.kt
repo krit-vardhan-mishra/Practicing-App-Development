@@ -1,11 +1,13 @@
 package com.just_for_fun.recipeapp.fragments
 
+import androidx.fragment.app.Fragment
+import com.just_for_fun.recipeapp.R
 import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,35 +19,29 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
 import com.just_for_fun.recipeapp.MainActivity
-import com.just_for_fun.recipeapp.R
 import com.just_for_fun.recipeapp.model.Recipe
 import java.io.File
-import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import android.os.Handler
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.Fragment
 
 class AddRecipeLayout : Fragment(R.layout.add_recipe_layout) {
 
     private var selectedImageUri: Uri? = null
-    private val CAMERA_PERMISSION_CODE = 1001
 
-    // In your Fragment/Activity class
-    private lateinit var addRecipeLayout: ConstraintLayout
     private lateinit var addRecipeCard: MaterialCardView
-    private lateinit var blurBackground: View
-
-    // UI Elements
+    private lateinit var btnCancel: MaterialButton
+    private lateinit var btnSaveRecipe: MaterialButton
+    private lateinit var imagePlaceholder: LinearLayout
+    private lateinit var ivRecipeImagePreview: ImageView
+    private lateinit var btnSelectImage: MaterialButton
     private lateinit var etRecipeName: TextInputEditText
     private lateinit var etCookingTime: TextInputEditText
     private lateinit var etServings: TextInputEditText
@@ -53,34 +49,36 @@ class AddRecipeLayout : Fragment(R.layout.add_recipe_layout) {
     private lateinit var etDescription: TextInputEditText
     private lateinit var etIngredients: TextInputEditText
     private lateinit var etInstructions: TextInputEditText
-    private lateinit var ivRecipeImagePreview: ImageView
-    private lateinit var imagePlaceholder: LinearLayout
-    private lateinit var btnAddImage: MaterialButton
-    private lateinit var btnCloseAddRecipe: ImageButton
-    private lateinit var btnCancel: MaterialButton
-    private lateinit var btnSaveRecipe: MaterialButton
+    private lateinit var etCloseRecipe: ImageButton
 
-    private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        uri?.let {
-            selectedImageUri = it
-            showImagePreview(it)
-        }
+    private var addRecipeListener: AddRecipeListener? = null
+
+    interface AddRecipeListener {
+        fun onRecipeAdded(recipe: Recipe)
     }
 
-    private val cameraLauncher =
-        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-            if (success && selectedImageUri != null) {
-                showImagePreview(selectedImageUri!!)
+    fun setAddRecipeListener(listener: MainActivity?) {
+        this.addRecipeListener = listener
+    }
+
+    private val pickImage =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                selectedImageUri = it
+                ivRecipeImagePreview.setImageURI(it)
+                ivRecipeImagePreview.visibility = View.VISIBLE
+                imagePlaceholder.visibility = View.GONE
             }
         }
 
-    private val permissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                openCamera()
-            } else {
-                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT)
-                    .show()
+    private val takePicture =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
+            if (success) {
+                selectedImageUri?.let {
+                    ivRecipeImagePreview.setImageURI(it)
+                    ivRecipeImagePreview.visibility = View.VISIBLE
+                    imagePlaceholder.visibility = View.GONE
+                }
             }
         }
 
@@ -89,19 +87,24 @@ class AddRecipeLayout : Fragment(R.layout.add_recipe_layout) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.add_recipe_layout, container, false)
-
-        // Initialize views
-        initializeAddRecipeViews(view)
-
-        return view
+        return inflater.inflate(R.layout.add_recipe_layout, container, false)
     }
 
-    private fun initializeAddRecipeViews(view: View) {
-        // Find the add recipe layout
-        addRecipeLayout = view.findViewById(R.id.add_recipe_layout)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews(view)
+        setupClickListeners()
+        setupDifficultyDropdown()
+        hide()
+    }
+
+    private fun initViews(view: View) {
         addRecipeCard = view.findViewById(R.id.add_recipe_card)
-        blurBackground = view.findViewById(R.id.blur_background)
+        btnCancel = view.findViewById(R.id.btn_cancel)
+        btnSaveRecipe = view.findViewById(R.id.btn_save_recipe)
+        imagePlaceholder = view.findViewById(R.id.image_placeholder)
+        ivRecipeImagePreview = view.findViewById(R.id.iv_recipe_image_preview)
+        btnSelectImage = view.findViewById(R.id.btn_add_image)
         etRecipeName = view.findViewById(R.id.et_recipe_name)
         etCookingTime = view.findViewById(R.id.et_cooking_time)
         etServings = view.findViewById(R.id.et_servings)
@@ -109,100 +112,192 @@ class AddRecipeLayout : Fragment(R.layout.add_recipe_layout) {
         etDescription = view.findViewById(R.id.et_description)
         etIngredients = view.findViewById(R.id.et_ingredients)
         etInstructions = view.findViewById(R.id.et_instructions)
-        ivRecipeImagePreview = view.findViewById(R.id.iv_recipe_image_preview)
-        imagePlaceholder = view.findViewById(R.id.image_placeholder)
-        btnAddImage = view.findViewById(R.id.btn_add_image)
-        btnCloseAddRecipe = view.findViewById(R.id.btn_close_add_recipe)
-        btnCancel = view.findViewById(R.id.btn_cancel)
-        btnSaveRecipe = view.findViewById(R.id.btn_save_recipe)
-
-        setupAddRecipeListeners()
-        setupDifficultyDropdown()
+        etCloseRecipe = view.findViewById(R.id.btn_close_add_recipe)
     }
 
-    private fun setupAddRecipeListeners() {
-        btnCloseAddRecipe.setOnClickListener {
-            hideAddRecipeDialog()
+    private fun setupClickListeners() {
+        btnCancel.setOnClickListener {
+            clearForm()
+            hide()
         }
 
-        btnCancel.setOnClickListener {
-            hideAddRecipeDialog()
+        etCloseRecipe.setOnClickListener {
+            clearForm()
+            hide()
         }
 
         btnSaveRecipe.setOnClickListener {
-            btnSaveRecipe.isEnabled = false
-            btnSaveRecipe.text = "Saving..."
-            saveNewRecipe()
+            saveRecipe()
         }
 
-        btnAddImage.setOnClickListener {
-            showImagePickerOptions()
-        }
-
-        blurBackground.setOnClickListener {
-            hideAddRecipeDialog()
+        btnSelectImage.setOnClickListener {
+            showImagePickerDialog()
         }
     }
 
     private fun setupDifficultyDropdown() {
-        val difficulties = arrayOf("Easy", "Medium", "Hard")
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, difficulties)
+        val difficulties = resources.getStringArray(R.array.difficulty_levels)
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_dropdown_item_1line,
+            difficulties
+        )
         etDifficulty.setAdapter(adapter)
     }
 
-    private fun showAddRecipeDialog() {
-        clearForm()
-
-        addRecipeLayout.visibility = View.VISIBLE
-
-        blurBackground.alpha = 0f
-        blurBackground.animate()
-            .alpha(1f)
-            .setDuration(200)
-            .start()
-
-        addRecipeCard.translationY = 100f
-        addRecipeCard.scaleX = 0.9f
-        addRecipeCard.scaleY = 0.9f
-        addRecipeCard.alpha = 0f
-
-        addRecipeCard.animate()
-            .translationY(0f)
-            .scaleX(1f)
-            .scaleY(1f)
-            .alpha(1f)
-            .setDuration(300)
-            .setInterpolator(OvershootInterpolator(1.1f))
-            .start()
-    }
-
-    private fun hideAddRecipeDialog() {
-        addRecipeCard.animate()
-            .translationY(100f)
-            .scaleX(0.9f)
-            .scaleY(0.9f)
-            .alpha(0f)
-            .setDuration(250)
-            .setInterpolator(AccelerateInterpolator())
-            .withEndAction {
-                addRecipeLayout.visibility = View.GONE
-                parentFragmentManager.popBackStack()
+    private fun showImagePickerDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Select Image")
+            .setItems(arrayOf("Choose from Gallery", "Take Photo")) { _, which ->
+                when (which) {
+                    0 -> pickImage.launch("image/*")
+                    1 -> checkCameraPermissionAndTakePicture()
+                }
             }
-            .start()
-
-        blurBackground.animate()
-            .alpha(0f)
-            .setDuration(200)
-            .start()
+            .show()
     }
 
-    private fun showImagePreview(uri: Uri) {
-        ivRecipeImagePreview.setImageURI(uri)
-        ivRecipeImagePreview.visibility = View.VISIBLE
-        imagePlaceholder.visibility = View.GONE
+    private fun checkCameraPermissionAndTakePicture() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CAMERA),
+                CAMERA_PERMISSION_REQUEST_CODE
+            )
+        } else {
+            dispatchTakePictureIntent()
+        }
     }
 
-    private fun clearForm() {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                dispatchTakePictureIntent()
+            } else {
+                Toast.makeText(requireContext(), "Camera permission denied", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun dispatchTakePictureIntent() {
+        val photoFile: File? = try {
+            createImageFile()
+        } catch (ex: Exception) {
+            Log.d("AddRecipeLayout", "Error from AddRecipe :$ex")
+            null
+        }
+        photoFile?.also {
+            selectedImageUri = FileProvider.getUriForFile(
+                requireContext(),
+                "${requireContext().packageName}.fileprovider",
+                it
+            )
+            takePicture.launch(selectedImageUri)
+        }
+    }
+
+    private fun createImageFile(): File {
+        val timeStamp: String =
+            SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(Date())
+        val storageDir: File = requireContext().filesDir
+        return File.createTempFile(
+            "JPEG_${timeStamp}_", /* prefix */
+            ".jpg", /* suffix */
+            storageDir /* directory */
+        )
+    }
+
+    private fun saveRecipe() {
+        val name = etRecipeName.text.toString().trim()
+        val cookingTime = etCookingTime.text.toString().trim()
+        val servings = etServings.text.toString().trim()
+        val difficulty = etDifficulty.text.toString().trim()
+        val description = etDescription.text.toString().trim()
+        val ingredients = etIngredients.text.toString().trim()
+        val instructions = etInstructions.text.toString().trim()
+
+        var isValid = true
+
+        if (name.isEmpty()) {
+            etRecipeName.error = "Recipe name is required"
+            isValid = false
+        } else {
+            etRecipeName.error = null
+        }
+
+        if (cookingTime.isEmpty()) {
+            etCookingTime.error = "Cooking time is required"
+            isValid = false
+        } else {
+            etCookingTime.error = null
+        }
+
+        if (servings.isEmpty()) {
+            etServings.error = "Servings is required"
+            isValid = false
+        } else {
+            etServings.error = null
+        }
+
+        if (difficulty.isEmpty()) {
+            etDifficulty.error = "Difficulty is required"
+            isValid = false
+        } else {
+            etDifficulty.error = null
+        }
+
+        if (ingredients.isEmpty()) {
+            etIngredients.error = "Ingredients are required"
+            isValid = false
+        } else {
+            etIngredients.error = null
+        }
+
+        if (instructions.isEmpty()) {
+            etInstructions.error = "Instructions are required"
+            isValid = false
+        } else {
+            etInstructions.error = null
+        }
+
+        if (isValid) {
+            val newRecipe = Recipe(
+                id = generateRecipeId(),
+                name = name,
+                image = R.drawable.lava_cake,
+                cookingTime = cookingTime,
+                difficulty = difficulty,
+                rating = 0.0f,
+                description = description,
+                ingredients = ingredients.split("\n"),
+                instructions = instructions.split("\n"),
+                servings = servings.toIntOrNull() ?: 1,
+                isSaved = false,
+                createdDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+            )
+
+            addRecipeListener?.onRecipeAdded(newRecipe)
+            Toast.makeText(requireContext(), "Recipe added!", Toast.LENGTH_SHORT).show()
+            clearForm()
+            hide()
+        }
+    }
+
+    private fun generateRecipeId(): Int {
+        return System.currentTimeMillis().toInt()
+    }
+
+    internal fun clearForm() {
         etRecipeName.text?.clear()
         etCookingTime.text?.clear()
         etServings.text?.clear()
@@ -215,6 +310,7 @@ class AddRecipeLayout : Fragment(R.layout.add_recipe_layout) {
         ivRecipeImagePreview.visibility = View.GONE
         imagePlaceholder.visibility = View.VISIBLE
 
+        // Clear errors
         etRecipeName.error = null
         etCookingTime.error = null
         etServings.error = null
@@ -223,182 +319,31 @@ class AddRecipeLayout : Fragment(R.layout.add_recipe_layout) {
         etInstructions.error = null
     }
 
-    private fun saveNewRecipe() {
-        if (!validateForm()) {
-            resetSaveButton()
-            return
-        }
+    fun show() {
+        view?.visibility = View.VISIBLE
+        addRecipeCard.animate()
+            .scaleX(1f)
+            .scaleY(1f)
+            .alpha(1f)
+            .setInterpolator(OvershootInterpolator())
+            .setDuration(400)
+            .start()
+    }
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            try {
-                val newRecipe = createRecipeFromForm()
-                MainActivity.allRecipes.add(newRecipe)
-                Toast.makeText(requireContext(), "Recipe saved successfully!", Toast.LENGTH_SHORT).show()
-                hideAddRecipeDialog()
-            } catch (e: Exception) {
-                Toast.makeText(
-                    requireContext(),
-                    "Error saving recipe: ${e.message}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } finally {
-                resetSaveButton()
+    fun hide() {
+        addRecipeCard.animate()
+            .scaleX(0.8f)
+            .scaleY(0.8f)
+            .alpha(0f)
+            .setInterpolator(AccelerateInterpolator())
+            .setDuration(300)
+            .withEndAction {
+                view?.visibility = View.GONE
             }
-        }, 1000)
+            .start()
     }
 
-    private fun resetSaveButton() {
-        btnSaveRecipe.isEnabled = true
-        btnSaveRecipe.text = "Save Recipe"
-    }
-
-    private fun validateForm(): Boolean {
-        var isValid = true
-
-        etRecipeName.error = null
-        etCookingTime.error = null
-        etServings.error = null
-        etDifficulty.error = null
-        etIngredients.error = null
-        etInstructions.error = null
-
-        if (etRecipeName.text.toString().trim().isEmpty()) {
-            etRecipeName.error = "Recipe name is required"
-            isValid = false
-        }
-
-        if (etCookingTime.text.toString().trim().isEmpty()) {
-            etCookingTime.error = "Cooking time is required"
-            isValid = false
-        } else {
-            val time = etCookingTime.text.toString().toIntOrNull()
-            if (time == null || time <= 0) {
-                etCookingTime.error = "Please enter a valid cooking time"
-                isValid = false
-            }
-        }
-
-        if (etServings.text.toString().trim().isEmpty()) {
-            etServings.error = "Servings is required"
-            isValid = false
-        } else {
-            val servings = etServings.text.toString().toIntOrNull()
-            if (servings == null || servings <= 0) {
-                etServings.error = "Please enter a valid number of servings"
-                isValid = false
-            }
-        }
-
-        if (etDifficulty.text.toString().trim().isEmpty()) {
-            etDifficulty.error = "Please select difficulty level"
-            isValid = false
-        }
-
-        if (etIngredients.text.toString().trim().isEmpty()) {
-            etIngredients.error = "Ingredients are required"
-            isValid = false
-        }
-
-        if (etInstructions.text.toString().trim().isEmpty()) {
-            etInstructions.error = "Instructions are required"
-            isValid = false
-        }
-
-        return isValid
-    }
-
-    private fun createRecipeFromForm(): Recipe {
-        val ingredients = etIngredients.text.toString()
-            .split("\n")
-            .map { it.trim() }
-            .filter { it.isNotEmpty() }
-
-        val instructions = etInstructions.text.toString()
-            .split("\n")
-            .map { it.trim() }
-            .filter { it.isNotEmpty() }
-
-        val currentDate = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault()).format(Date())
-
-        return Recipe(
-            id = generateRecipeId(),
-            name = etRecipeName.text.toString().trim(),
-            image = saveImageAndGetResourceId(),
-            cookingTime = "${etCookingTime.text.toString().trim()} min",
-            difficulty = etDifficulty.text.toString().trim(),
-            rating = 0f,
-            description = etDescription.text.toString().trim(),
-            ingredients = ingredients,
-            instructions = instructions,
-            servings = etServings.text.toString().toIntOrNull() ?: 1,
-            isSaved = false,
-            savedDate = null,
-            createdDate = currentDate
-        )
-    }
-
-    private fun saveImageAndGetResourceId(): Int {
-        selectedImageUri?.let { uri ->
-            try {
-                val inputStream = requireContext().contentResolver.openInputStream(uri)
-                val fileName = "recipe_${System.currentTimeMillis()}.jpg"
-                val file = File(requireContext().filesDir, fileName)
-                val outputStream = FileOutputStream(file)
-
-                inputStream?.copyTo(outputStream)
-                inputStream?.close()
-                outputStream.close()
-
-                return R.drawable.lava_cake
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        return R.drawable.lava_cake
-    }
-
-
-    private fun generateRecipeId(): Int {
-        return System.currentTimeMillis().toInt()
-    }
-
-    private fun showImagePickerOptions() {
-        val options = arrayOf("Choose from Gallery", "Take Photo")
-
-        AlertDialog.Builder(requireContext())
-            .setTitle("Select Image")
-            .setItems(options) { _, which ->
-                when (which) {
-                    0 -> imagePickerLauncher.launch("image/*")
-                    1 -> checkCameraPermissionAndOpen()
-                }
-            }
-            .show()
-    }
-
-    private fun checkCameraPermissionAndOpen() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                openCamera()
-            }
-
-            else -> {
-                permissionLauncher.launch(Manifest.permission.CAMERA)
-            }
-        }
-    }
-
-    private fun openCamera() {
-        val imageFile =
-            File(requireContext().externalCacheDir, "recipe_${System.currentTimeMillis()}.jpg")
-        selectedImageUri = FileProvider.getUriForFile(
-            requireContext(),
-            "${requireContext().packageName}.fileprovider",
-            imageFile
-        )
-        cameraLauncher.launch(selectedImageUri)
+    companion object {
+        private const val CAMERA_PERMISSION_REQUEST_CODE = 101
     }
 }

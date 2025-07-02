@@ -22,7 +22,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Back"
+            android:contentDescription="@string/back"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/poppins_bold"
             android:maxLines="1"
-            android:text="Recipe Details"
+            android:text="@string/recipe_details"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -51,7 +51,7 @@
             android:layout_height="48dp"
             android:layout_marginEnd="8dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Share"
+            android:contentDescription="@string/share"
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
                     android:layout_gravity="top|end"
                     android:layout_margin="12dp"
                     android:background="@drawable/circle_background"
-                    android:contentDescription="Save recipe"
+                    android:contentDescription="@string/save_recipe"
                     android:src="@drawable/ic_bookmark_filled" />
 
             </androidx.cardview.widget.CardView>
@@ -107,7 +107,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Recipe Name"
+                android:text="@string/recipe_name"
                 android:textColor="@color/black"
                 android:textSize="24sp" />
 
@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="25 min"
+                        android:text="@string/_25_min"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -148,9 +148,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Cook Time"
+                        android:text="@string/cook_time"
                         android:textColor="@color/gray"
-                        android:textSize="10sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="Medium"
+                        android:text="@string/medium"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -183,9 +183,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Difficulty"
+                        android:text="@string/difficulty"
                         android:textColor="@color/gray"
-                        android:textSize="10sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -210,7 +210,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="2"
+                        android:text="@string/_2"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -218,9 +218,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Servings"
+                        android:text="@string/servings"
                         android:textColor="@color/gray"
-                        android:textSize="10sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -245,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/poppins_medium"
-                        android:text="4.8"
+                        android:text="@string/_4_8"
                         android:textColor="@color/black"
                         android:textSize="12sp" />
 
@@ -253,9 +253,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_regular"
-                        android:text="Rating"
+                        android:text="@string/rating"
                         android:textColor="@color/gray"
-                        android:textSize="10sp" />
+                        android:textSize="11sp" />
 
                 </LinearLayout>
 
@@ -273,7 +273,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Description"
+                    android:text="@string/description"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -284,7 +284,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/poppins_regular"
                     android:lineSpacingExtra="4dp"
-                    android:text="Recipe description will appear here..."
+                    android:text="@string/recipe_description_will_appear_here"
                     android:textColor="@color/gray_dark"
                     android:textSize="14sp" />
 
@@ -304,7 +304,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Ingredients"
+                    android:text="@string/ingredients"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -331,7 +331,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Instructions"
+                    android:text="@string/instructions"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
