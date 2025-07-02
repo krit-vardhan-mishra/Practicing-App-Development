@@ -11,8 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.OvershootInterpolator
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
@@ -321,24 +320,24 @@ class AddRecipeLayout : Fragment(R.layout.add_recipe_layout) {
 
     fun show() {
         view?.visibility = View.VISIBLE
+        addRecipeCard.translationY = addRecipeCard.height.toFloat()
+        addRecipeCard.alpha = 1f
         addRecipeCard.animate()
-            .scaleX(1f)
-            .scaleY(1f)
-            .alpha(1f)
-            .setInterpolator(OvershootInterpolator())
-            .setDuration(400)
+            .translationY(0f)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setDuration(1200)
             .start()
     }
 
     fun hide() {
         addRecipeCard.animate()
-            .scaleX(0.8f)
-            .scaleY(0.8f)
-            .alpha(0f)
-            .setInterpolator(AccelerateInterpolator())
-            .setDuration(300)
+            .translationY(addRecipeCard.height.toFloat()) // Slide down
+            .alpha(1f)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setDuration(1200)
             .withEndAction {
                 view?.visibility = View.GONE
+                addRecipeCard.translationY = 0f
             }
             .start()
     }
