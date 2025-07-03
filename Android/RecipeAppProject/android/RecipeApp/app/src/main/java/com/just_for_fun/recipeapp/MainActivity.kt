@@ -51,6 +51,19 @@ class MainActivity : AppCompatActivity(), AddRecipeLayout.AddRecipeListener {
         fun isRecipeSaved(recipeId: Int): Boolean {
             return savedRecipes.any { it.id == recipeId }
         }
+
+        fun addToSaved(recipe: Recipe) {
+            saveRecipe(recipe)
+            allRecipes.find { it.id == recipe.id }?.isSaved = true
+        }
+
+        fun removeFromSaved(recipeId: Int) {
+            val recipe = savedRecipes.find { it.id == recipeId }
+            recipe?.let {
+                unsavedRecipe(it)
+                allRecipes.find { r -> r.id == recipeId }?.isSaved = false
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

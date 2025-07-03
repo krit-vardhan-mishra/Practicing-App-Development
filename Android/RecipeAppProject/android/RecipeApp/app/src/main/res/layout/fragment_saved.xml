@@ -69,6 +69,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="@string/explore_recipes"
             android:textSize="14sp"
+            android:textColor="@color/blue"
             app:cornerRadius="20dp"
             android:background="@android:color/transparent"
             app:icon="@drawable/ic_explore"

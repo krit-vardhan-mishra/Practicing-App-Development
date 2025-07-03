@@ -49,12 +49,15 @@ class RecipeSavedRecyclerView :
             recipeDifficultyView.text = recipe.difficulty
             recipeRatingView.text = recipe.rating.toString()
 
+            updateSaveButtonState(recipe)
+
             recipeUnsavedButton.setOnClickListener {
                 if (MainActivity.isRecipeSaved(recipe.id)) {
-                    recipeUnsavedButton.setImageResource(R.drawable.bookmark_added)
+                    MainActivity.removeFromSaved(recipe.id)
                 } else {
-                    recipeUnsavedButton.setImageResource(R.drawable.ic_bookmark_outline)
+                    MainActivity.addToSaved(recipe)
                 }
+                updateSaveButtonState(recipe)
             }
 
             itemView.setOnClickListener {
@@ -63,6 +66,18 @@ class RecipeSavedRecyclerView :
                 itemView.context.startActivity(intent)
             }
         }
+
+        private fun updateSaveButtonState(recipe: Recipe) {
+            val isSaved = MainActivity.isRecipeSaved(recipe.id)
+            if (isSaved) {
+                recipeUnsavedButton.setImageResource(R.drawable.bookmark_added)
+                recipeUnsavedButton.contentDescription = "Remove from saved"
+            } else {
+                recipeUnsavedButton.setImageResource(R.drawable.ic_bookmark_filled)
+                recipeUnsavedButton.contentDescription = "Save recipe"
+            }
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeSavedViewHolder {

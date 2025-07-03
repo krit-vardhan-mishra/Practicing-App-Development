@@ -8,8 +8,8 @@
 
         <!-- Status bar configuration -->
         <item name="android:statusBarColor">@color/primary_color</item> <!-- Transparent status bar -->
-<!--        <item name="android:windowLightStatusBar">true</item> &lt;!&ndash; Optional: Light icons on status bar &ndash;&gt;-->
-<!--        <item name="android:windowTranslucentStatus">false</item> &lt;!&ndash; Ensure status bar is not translucent unless desired &ndash;&gt;-->
+        <item name="android:windowLightStatusBar">true</item> <!-- Optional: Light icons on status bar -->
+        <item name="android:windowTranslucentStatus">false</item> <!-- Ensure status bar is not translucent unless desired -->
         <item name="android:fitsSystemWindows">true</item> <!-- Ensure content fits system windows -->
 
         <!-- Ensure content starts below status bar -->
