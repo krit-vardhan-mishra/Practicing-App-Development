@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "777985867434",
+    "project_id": "just-for-fun-7d076",
+    "storage_bucket": "just-for-fun-7d076.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777985867434:android:f7ecb5703869aeef88dad3",
+        "android_client_info": {
+          "package_name": "com.just_for_fun.justforfun"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg9pJNujviRcdVRKtbE5Cy8sFZu30WxD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

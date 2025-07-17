@@ -1,47 +1,73 @@
 package com.just_for_fun.justforfun
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.just_for_fun.justforfun.ui.theme.JustForFunTheme
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.just_for_fun.justforfun.ui.fragments.FavoritesFragment
+import com.just_for_fun.justforfun.ui.fragments.HomeFragment
+import com.just_for_fun.justforfun.ui.fragments.MoviesFragment
+import com.just_for_fun.justforfun.ui.fragments.ProfileFragment
+import com.just_for_fun.justforfun.ui.fragments.WatchlistFragment
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var bottomNavigation: BottomNavigationView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            JustForFunTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+        setContentView(R.layout.activity_main)
+
+        initializeViews()
+        setupBottomNavigation()
+
+        // Load default fragment
+        if (savedInstanceState == null) {
+            loadFragment(HomeFragment())
+        }
+    }
+
+    private fun initializeViews() {
+        bottomNavigation = findViewById(R.id.bottom_navigation)
+    }
+
+    private fun setupBottomNavigation() {
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    loadFragment(HomeFragment())
+                    true
                 }
+                R.id.nav_movies -> {
+                    loadFragment(MoviesFragment())
+                    true
+                }
+                R.id.nav_watchlist -> {
+                    loadFragment(WatchlistFragment())
+                    true
+                }
+                R.id.nav_favorites -> {
+                    loadFragment(FavoritesFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    loadFragment(ProfileFragment())
+                    true
+                }
+                else -> false
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    JustForFunTheme {
-        Greeting("Android")
+    private fun loadFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
+
+
 }
+

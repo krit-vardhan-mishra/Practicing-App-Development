@@ -8,7 +8,7 @@
 
         <!-- Status bar configuration -->
         <item name="android:statusBarColor">#6200EE</item> <!-- Transparent status bar -->
-        <item name="android:windowLightStatusBar">true</item> <!-- Optional: Light icons on status bar -->
+        <item name="android:windowLightStatusBar">false</item> <!-- Optional: Light icons on status bar -->
         <item name="android:windowTranslucentStatus">false</item> <!-- Ensure status bar is not translucent unless desired -->
         <item name="android:fitsSystemWindows">true</item> <!-- Ensure content fits system windows -->
 
