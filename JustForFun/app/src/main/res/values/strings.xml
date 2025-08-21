@@ -1,34 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">JustForFun</string>
-    <string name="content_desc_movie_poster">Movie Poster</string>
-    <string name="content_desc_tvshow_poster">TV Show Poster</string>
-    <string name="content_desc_rating">Rating</string>
-    <string name="content_desc_add_favorite">Add to Favorites</string>
-    <string name="content_desc_add_watchlist">Add to Watchlist</string>
-    <string name="content_desc_mark_watched">Mark as Watched</string>
-    <string name="content_desc_empty_feed">Empty Feed</string>
-    <string name="content_desc_empty_users">No Users</string>
-    <string name="search_hint">Search movies, TV shows, people...</string>
-    <string name="feed_title">Home Feed</string>
-    <string name="empty_feed_message">No content available. Follow users or search for movies!</string>
-    <string name="empty_users_message">No users found.</string>
-    <string name="favorite">Favorite</string>
-    <string name="watchlist">Watchlist</string>
-    <string name="watched">Watched</string>
-    <string name="rate">Rate</string>
-    <string name="your_rating">Your Rating:</string>
-    <string name="synopsis">Synopsis</string>
-    <string name="cast_crew">Cast and Crew</string>
-    <string name="reviews">Reviews</string>
-    <string name="write_review">Write Review</string>
-    <string name="more_like_this">More Like This</string>
-    <string name="rating">Rating</string>
-    <string name="review_text_hint">Write your review...</string>
-    <string name="spoiler_warning">Contains Spoilers</string>
-    <string name="tags">Tags</string>
-    <string name="add_tags_hint">Add tags (e.g., action, thrilling)</string>
-    <string name="submit_review">Submit Review</string>
-    <string name="user_list_title">Users</string>
-    <string name="follow">Follow</string>
+
+    <!-- Login Screen Strings -->
+    <string name="welcome_back">Welcome Back</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or">OR</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="no_account_prompt">Don\'t have an account? </string>
+    <string name="create_account">Create an account</string>
+    <string name="terms_privacy">By continuing you agree to Terms and Privacy</string>
+
+    <!-- Navigation -->
+    <string name="title_home">Home</string>
+    <string name="title_movies">Movies</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_watchlist">Watchlist</string>
+    <string name="title_profile">Profile</string>
 </resources>
+

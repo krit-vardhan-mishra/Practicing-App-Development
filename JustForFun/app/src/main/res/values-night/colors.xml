@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark theme color overrides -->
+    <color name="background_primary">#121212</color> <!-- Dark background -->
+    <color name="background_secondary">#1E1E1E</color> <!-- Slightly lighter dark -->
+    <color name="surface_color">#2C2C2C</color> <!-- Surface elements -->
+    <color name="text_primary">#FFFFFF</color> <!-- White text for dark theme -->
+    <color name="text_secondary">#B3B3B3</color> <!-- Light gray for secondary text -->
+    <color name="accent_color">#BB86FC</color> <!-- Purple accent for dark theme -->
+    <color name="warning_color">#FF6B6B</color> <!-- Red-orange for warnings -->
+    <color name="reply_background">#333333</color> <!-- Dark gray for reply background -->
+    <color name="divider_color">#444444</color> <!-- Dark dividers -->
+</resources>

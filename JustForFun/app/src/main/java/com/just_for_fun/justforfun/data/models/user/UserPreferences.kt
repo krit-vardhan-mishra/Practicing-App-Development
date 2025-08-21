@@ -1,5 +1,6 @@
-package com.just_for_fun.justforfun.data.models
+package com.just_for_fun.justforfun.data.models.user
 
+// Preferences for user settings in the app
 data class UserPreferences(
     val notificationsEnable: Boolean = true,
     val emailNotifications: Boolean = true,

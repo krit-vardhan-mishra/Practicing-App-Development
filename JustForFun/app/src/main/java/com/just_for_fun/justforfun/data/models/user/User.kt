@@ -1,4 +1,4 @@
-package com.just_for_fun.justforfun.data.models
+package com.just_for_fun.justforfun.data.models.user
 
 data class User(
     val id: String,                          // unique ID for the user

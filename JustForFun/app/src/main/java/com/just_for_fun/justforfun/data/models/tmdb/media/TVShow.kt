@@ -1,5 +1,6 @@
-package com.just_for_fun.justforfun.data.models
+package com.just_for_fun.justforfun.data.models.tmdb.award.media
 
+// Represents a TV show with various details
 data class TVShow(
     val id: String,                 // unique ID of tv show
     val name: String,               // name of the tv show

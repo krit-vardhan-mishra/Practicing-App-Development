@@ -1,5 +1,6 @@
-package com.just_for_fun.justforfun.data.models
+package com.just_for_fun.justforfun.data.models.user.review
 
+// Represents a reply to a review or another reply in the app
 data class Reply(
     val id: String,                        // unique ID of the reply
     val userId: String,                    // ID of the user who wrote the reply
@@ -17,4 +18,3 @@ data class Reply(
     val isEdited: Boolean = false,              // whether the reply has been edited
     val editedTimestamp: Long? = null           // timestamp of last edit
 )
-//  a reply will also be review of someone's review or reply

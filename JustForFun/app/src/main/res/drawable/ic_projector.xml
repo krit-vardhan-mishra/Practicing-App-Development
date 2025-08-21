@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="72"
+    android:viewportHeight="72">
+    <!-- Body of projector -->
+    <path
+        android:fillColor="#F5C249"
+        android:pathData="M12,44h40a4,4 0 0 1 4,4v10H8V48a4,4 0 0 1 4,-4z" />
+    <!-- Lens housing -->
+    <path
+        android:fillColor="#FFDFA0"
+        android:pathData="M52,44h4c2.2,0 4,1.8 4,4v10h-8z" />
+    <!-- Film reels (two discs) -->
+    <path
+        android:fillColor="#F5C249"
+        android:pathData="M24,18a12,12 0 1 1 0,24a12,12 0 0 1 0,-24zM44,18a12,12 0 1 1 0,24a12,12 0 0 1 0,-24z" />
+    <!-- Reel holes -->
+    <path
+        android:fillColor="#141A24"
+        android:pathData="M24,24a3,3 0 1 1 0,6a3,3 0 0 1 0,-6zM44,24a3,3 0 1 1 0,6a3,3 0 0 1 0,-6z" />
+    <!-- Feet -->
+    <path
+        android:fillColor="#D39E32"
+        android:pathData="M18,58h6v4h-6zM40,58h6v4h-6z" />
+    <!-- Light beam (subtle, semi-transparent) -->
+    <path
+        android:fillColor="#80F5C249"
+        android:pathData="M60,44L72,38v24L60,56z" />
+</vector>

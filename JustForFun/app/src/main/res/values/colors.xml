@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Material Design default colors -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,9 +8,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Light theme custom colors -->
+    <color name="background_primary">#FFFFFF</color> <!-- White background -->
+    <color name="background_secondary">#F8F8F8</color> <!-- Very light gray -->
+    <color name="surface_color">#FAFAFA</color> <!-- Surface elements -->
     <color name="text_primary">#212121</color> <!-- Dark gray for primary text -->
     <color name="text_secondary">#757575</color> <!-- Lighter gray for secondary text -->
     <color name="accent_color">#6200EE</color> <!-- Purple for buttons, links -->
     <color name="warning_color">#FF5722</color> <!-- Orange for spoiler warnings -->
     <color name="reply_background">#F5F5F5</color> <!-- Light gray for reply background -->
+    <color name="divider_color">#E0E0E0</color> <!-- Light dividers -->
 </resources>

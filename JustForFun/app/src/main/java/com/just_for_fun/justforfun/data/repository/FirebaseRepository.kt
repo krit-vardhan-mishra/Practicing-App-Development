@@ -2,7 +2,7 @@ package com.just_for_fun.justforfun.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.just_for_fun.justforfun.data.models.Movie
+import com.just_for_fun.justforfun.data.models.tmdb.award.media.Movie
 import kotlinx.coroutines.tasks.await
 
 class FirebaseRepository {
