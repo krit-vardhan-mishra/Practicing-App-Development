@@ -18,7 +18,7 @@ data class User(
     val ratings: List<String> = emptyList(),               // list of IDs of rating given by the user to movies/tv shows
     val likedReviews: List<String> = emptyList(),          // list of IDs of reviews that user have liked
     val likedReplies: List<String> = emptyList(),       // track which replies user liked (like likedReviews)
-    val replies: List<Reply> = emptyList(),                // list of replies that user have made
+    val replies: List<String> = emptyList(),                // list of replies that user have made
     val watchHistory: List<String> = emptyList(),          // list of IDs of movies/tv shows that user have watched and marked completed
     val socialLinks: Map<String, String>  = emptyMap(),   // list of user's other social media IDs
     val topGenres: List<String> = emptyList(),             // list of most watched genres by user

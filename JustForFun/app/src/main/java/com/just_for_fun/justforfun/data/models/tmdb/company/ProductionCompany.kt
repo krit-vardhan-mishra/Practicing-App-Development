@@ -1,4 +1,6 @@
-package com.just_for_fun.justforfun.data.models.tmdb.award.company
+package com.just_for_fun.justforfun.data.models.tmdb.company
+
+import com.just_for_fun.justforfun.data.models.tmdb.award.company.CompanyType
 
 // Represents a production company
 data class ProductionCompany(

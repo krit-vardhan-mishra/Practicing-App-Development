@@ -16,6 +16,8 @@
     <color name="text_primary">#212121</color> <!-- Dark gray for primary text -->
     <color name="text_secondary">#757575</color> <!-- Lighter gray for secondary text -->
     <color name="accent_color">#6200EE</color> <!-- Purple for buttons, links -->
+    <color name="colorAccent">#6200EE</color> <!-- Accent color for UI elements -->
+    <color name="colorPrimary">#6200EE</color> <!-- Primary color for buttons -->
     <color name="warning_color">#FF5722</color> <!-- Orange for spoiler warnings -->
     <color name="reply_background">#F5F5F5</color> <!-- Light gray for reply background -->
     <color name="divider_color">#E0E0E0</color> <!-- Light dividers -->
