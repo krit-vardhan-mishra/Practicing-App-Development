@@ -1,0 +1,58 @@
+// Firestore Security Rules for your app
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Users can only read/write their own user document
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if resource.data.isPrivate == false; // Public profiles can be read by anyone
+    }
+    
+    // Reviews can be read by anyone, but only written by authenticated users
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Replies can be read by anyone, but only written by authenticated users
+    match /replies/{replyId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Ratings can only be read/written by the owner
+    match /ratings/{ratingId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Watchlist items can only be read/written by the owner
+    match /watchlist/{itemId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Custom lists can be read by anyone if public, written only by owner
+    match /customLists/{listId} {
+      allow read: if resource.data.isPublic == true || (request.auth != null && request.auth.uid == resource.data.userId);
+      allow write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+    
+    // Follow relationships
+    match /follows/{followId} {
+      allow read: if request.auth != null && (request.auth.uid == resource.data.followerId || request.auth.uid == resource.data.followingId);
+      allow write: if request.auth != null && request.auth.uid == resource.data.followerId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.followerId;
+    }
+    
+    // User stats can only be read/written by the owner
+    match /userStats/{statId} {
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.userId;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
+    }
+  }
+}
