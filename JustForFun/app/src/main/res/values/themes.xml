@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.JustForFun" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.JustForFun" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color -->
         <item name="colorPrimary">@color/accent_color</item>
         <item name="colorPrimaryVariant">#3700B3</item>
-        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorOnPrimary">#000000</item>
 
         <!-- Secondary brand color -->
         <item name="colorSecondary">@color/accent_color</item>
         <item name="colorSecondaryVariant">#018786</item>
-        <item name="colorOnSecondary">#000000</item>
+        <item name="colorOnSecondary">#FFFFFF</item>
 
         <!-- Background colors -->
         <item name="android:colorBackground">@color/background_primary</item>
@@ -17,13 +17,13 @@
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="colorOnBackground">@color/text_primary</item>
 
-        <!-- Status bar configuration -->
+        <!-- Status bar configuration for dark theme -->
         <item name="android:statusBarColor">@color/surface_color</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
-    <!-- Custom toolbar style for proper icon visibility -->
+    <!-- Custom toolbar style for dark theme -->
     <style name="CustomToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:theme">@style/CustomToolbarTheme</item>
         <item name="android:background">@color/surface_color</item>
@@ -33,5 +33,15 @@
     <style name="CustomToolbarTheme" parent="ThemeOverlay.MaterialComponents.Toolbar.Surface">
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="colorControlNormal">@color/text_primary</item>
+    </style>
+
+    <!-- Dialog theme for dark theme -->
+    <style name="Theme.JustForFun.Dialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="colorPrimary">@color/accent_color</item>
+        <item name="android:colorBackground">@color/background_secondary</item>
+        <item name="colorSurface">@color/background_secondary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
     </style>
 </resources>

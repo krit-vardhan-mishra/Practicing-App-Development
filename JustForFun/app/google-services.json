@@ -12,7 +12,6 @@
           "package_name": "com.just_for_fun.justforfun"
         }
       },
-      "oauth_client": [],
       "api_key": [
         {
           "current_key": "AIzaSyBS4rVjJAO_rrRlg5KhVAtXLjzFuoHNAg0"
@@ -20,7 +19,6 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
         }
       }
     }

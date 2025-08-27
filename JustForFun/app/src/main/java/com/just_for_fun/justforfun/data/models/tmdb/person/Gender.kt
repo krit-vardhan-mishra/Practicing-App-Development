@@ -6,5 +6,6 @@ enum class Gender {
     FEMALE,
     NON_BINARY,
     OTHER,
-    PREFER_NOT_TO_SAY
+    PREFER_NOT_TO_SAY,
+    UNKNOWN
 }

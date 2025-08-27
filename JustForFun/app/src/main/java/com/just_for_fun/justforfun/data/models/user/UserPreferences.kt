@@ -11,6 +11,5 @@ data class UserPreferences(
     val showReviews: Boolean = true,
     val allowFollowRequests: Boolean = true,
     val showOnlineStatus: Boolean = true,
-    val language: String = "en",
-    val theme: String = "system"
+    val language: String = "en"
 )

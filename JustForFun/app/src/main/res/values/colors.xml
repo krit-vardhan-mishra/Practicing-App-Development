@@ -9,16 +9,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Light theme custom colors -->
-    <color name="background_primary">#FFFFFF</color> <!-- White background -->
-    <color name="background_secondary">#F8F8F8</color> <!-- Very light gray -->
-    <color name="surface_color">#FAFAFA</color> <!-- Surface elements -->
-    <color name="text_primary">#212121</color> <!-- Dark gray for primary text -->
-    <color name="text_secondary">#757575</color> <!-- Lighter gray for secondary text -->
-    <color name="accent_color">#6200EE</color> <!-- Purple for buttons, links -->
-    <color name="colorAccent">#6200EE</color> <!-- Accent color for UI elements -->
-    <color name="colorPrimary">#6200EE</color> <!-- Primary color for buttons -->
-    <color name="warning_color">#FF5722</color> <!-- Orange for spoiler warnings -->
-    <color name="reply_background">#F5F5F5</color> <!-- Light gray for reply background -->
-    <color name="divider_color">#E0E0E0</color> <!-- Light dividers -->
+    <!-- Dark theme colors (now the only theme) -->
+    <color name="background_primary">#121212</color> <!-- Dark background -->
+    <color name="background_secondary">#1E1E1E</color> <!-- Slightly lighter dark -->
+    <color name="surface_color">#2C2C2C</color> <!-- Surface elements -->
+    <color name="text_primary">#FFFFFF</color> <!-- White text for dark theme -->
+    <color name="text_secondary">#B3B3B3</color> <!-- Light gray for secondary text -->
+    <color name="accent_color">#BB86FC</color> <!-- Purple accent for dark theme -->
+    <color name="colorAccent">#BB86FC</color> <!-- Accent color for UI elements in dark theme -->
+    <color name="colorPrimary">#BB86FC</color> <!-- Primary color for buttons in dark theme -->
+    <color name="warning_color">#FF6B6B</color> <!-- Red-orange for warnings -->
+    <color name="reply_background">#333333</color> <!-- Dark gray for reply background -->
+    <color name="divider_color">#444444</color> <!-- Dark dividers -->
 </resources>
